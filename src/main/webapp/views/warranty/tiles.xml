@@ -1,0 +1,28 @@
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+
+	<definition name="warranty/edit" extends="master.page">
+		<put-attribute name="title" value="Warranty edit" />
+		<put-attribute name="body" value="/views/warranty/edit.jsp" />
+	</definition>
+	
+	<definition name="warranty/create" extends="master.page">
+		<put-attribute name="title" value="Warranty create" />
+		<put-attribute name="body" value="/views/warranty/create.jsp" />
+	</definition>
+
+
+	<definition name="warranty/show" extends="master.page">
+		<put-attribute name="title" value="Show Warranty" />
+		<put-attribute name="body" value="/views/warranty/show.jsp" />
+	</definition>
+
+	<definition name="warranty/list" extends="master.page">
+		<put-attribute name="title" value="List Warranty" />
+		<put-attribute name="body" value="/views/warranty/list.jsp" />
+	</definition>
+
+</tiles-definitions>
