@@ -14,6 +14,9 @@ import org.springframework.util.Assert;
 import repositories.HandyWorkerRepository;
 import security.Authority;
 import security.UserAccount;
+import domain.Actor;
+import domain.Application;
+import domain.Curriculum;
 import domain.HandyWorker;
 
 @Service
@@ -29,8 +32,6 @@ public class HandyWorkerService {
 	@Autowired
 	private MessageBoxService		messageboxService;
 
-	@Autowired
-	private CurriculumService		curriculumService;
 
 
 	public HandyWorker create() {
@@ -38,15 +39,31 @@ public class HandyWorkerService {
 		HandyWorker res;
 		res = new HandyWorker();
 		final UserAccount userAccount = new UserAccount();
+		final Actor actor = this.actorService.getPrincipal();
+		final Collection<Authority> authorities2 = actor.getUserAccount().getAuthorities();
 		final List<Authority> authorities = new ArrayList<Authority>();
+		final ArrayList<String> listAuth = new ArrayList<String>();
 		final Authority authority = new Authority();
 		authority.setAuthority(Authority.HANDYWORKER);
 		authorities.add(authority);
 		userAccount.setAuthorities(authorities);
 		res.setUserAccount(userAccount);
-
-		//this.messageboxService.addDefaultMessageBoxs(res);
-		//res.setCurriculum(this.curriculumService.create());
+		
+		
+		if(!authorities2.isEmpty())
+			for(final Authority au: authorities2)
+				listAuth.add(au.getAuthority());
+		Assert.isTrue(listAuth.contains("ADMIN"));
+		Assert.notNull(res);
+						
+		final List<Application> applications = new ArrayList<Application>();
+		res.setApplications(applications);
+		
+		final Curriculum curriculum = new Curriculum();
+		res.setCurriculum(curriculum);
+		
+		this.messageboxService.addDefaultMessageBoxs(res);//Revisar el messageBox
+		
 		return res;
 	}
 
@@ -67,7 +84,7 @@ public class HandyWorkerService {
 
 	public HandyWorker save(final HandyWorker handyWorker) {
 
-		final HandyWorker result;
+		HandyWorker result;
 
 		Assert.notNull(handyWorker);
 
@@ -78,10 +95,4 @@ public class HandyWorkerService {
 		return result;
 	}
 
-	//Creo que handyWorker no tiene delete
-	public void delete(final HandyWorker handyWorker) {
-		Assert.notNull(handyWorker);
-		this.handyworkerRepository.delete(handyWorker);
-
-	}
 }

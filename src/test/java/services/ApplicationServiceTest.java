@@ -14,7 +14,7 @@ import org.springframework.util.Assert;
 
 import utilities.AbstractTest;
 import domain.Application;
-import domain.FixUpTask;
+import domain.CreditCard;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
@@ -25,19 +25,41 @@ public class ApplicationServiceTest extends AbstractTest {
 
 	@Autowired
 	private ApplicationService	applicationService;
+	
 	@Autowired
-	private FixUpTaskService	fixUpTaskService;
-
+	private CreditCardService creditCardService;
 
 	@Test
-	public void testSaveApplication() {
+	public void testCreateApplication() {
 		super.authenticate("handyWorker1");
-
-		final FixUpTask fixUpTask = this.fixUpTaskService.create();
-		final Application application = this.applicationService.create(fixUpTask);
+		final Application application = this.applicationService.create(1425);
+		//Sin los 2 set funciona bien tambien
+		application.setPrice(174.0);
+		application.setHandyWorkerComments("¿Como estan ustedes?");
+		Assert.notNull(application);
+	}
+	
+	@Test
+	public void testSaveApplication() {
+		super.authenticate("customer1");
+		final Application application = this.applicationService.findOne(1429);
+		application.setStatus("REJECTED");
 		this.applicationService.save(application);
+		Assert.isTrue(this.applicationService.findAll().contains(application));
 	}
 
+	@Test
+	public void testSaveApplication2() {
+		super.authenticate("customer1");
+		final Application application = this.applicationService.findOne(1429);
+		application.setStatus("ACCEPTED");
+		application.setCustomerComment("Bieennnn!");
+		final CreditCard cd = this.creditCardService.findOne(1372);
+		application.setCreditCard(cd);
+		this.applicationService.save(application);
+		Assert.isTrue(this.applicationService.findAll().contains(application));
+	}
+	
 	@Test
 	public void findOneTest() {
 		final Application application = this.applicationService.findOne(1430);
@@ -45,7 +67,7 @@ public class ApplicationServiceTest extends AbstractTest {
 	}
 
 	@Test
-	public void findAll() {
+	public void findAllTest() {
 		final Collection<Application> application = this.applicationService.findAll();
 		Assert.notEmpty(application);
 	}

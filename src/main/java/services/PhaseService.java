@@ -2,7 +2,6 @@
 package services;
 
 import java.sql.Timestamp;
-import java.util.Collection;
 import java.util.Date;
 
 import javax.transaction.Transactional;
@@ -22,28 +21,15 @@ public class PhaseService {
 	@Autowired
 	private PhaseRepository	phaseRepository;
 
-
-	//¿Poner applicationService?
-
 	public Phase create(final Application application) {
 		final Phase res = new Phase();
 		Assert.notNull(application);
 		Assert.isTrue(application.getStatus().equals("ACCEPTED"));
-		//¿Debe ser application aceptada?
-
 		//La intención es parsear el TimeStamp en date
 		final Timestamp stamp = new Timestamp(System.currentTimeMillis());
 		final Date startMoment = new Date(stamp.getTime());
 		res.setStartMoment(startMoment);
 
-		return res;
-	}
-
-	//Creo que sobra, ya que solo pone showing them, creating, updating, and deleting phases.
-	public Collection<Phase> findAll() {
-		Collection<Phase> res;
-		res = this.phaseRepository.findAll();
-		Assert.notNull(res);
 		return res;
 	}
 

@@ -8,6 +8,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.util.Assert;
 
 import utilities.AbstractTest;
 import domain.HandyWorker;
@@ -22,41 +23,23 @@ public class HandyWorkerServiceTest extends AbstractTest {
 	@Autowired
 	private HandyWorkerService	handyWorkerService;
 
-	@Autowired
-	private MessageBoxService	messageboxService;
-
-
+	@Test 
+	public void createTest(){
+		HandyWorker handyWorker = new HandyWorker();
+		handyWorker.setName("Kevin");
+		handyWorker.setSurname("Durant");
+		handyWorker.setEmail("durantula@gmail.com");
+		handyWorker.setPhone("www.urlfoto.com/miphoto.php");
+		handyWorker = this.handyWorkerService.save(handyWorker);
+		Assert.notNull(handyWorker);
+	}
+	
 	@Test
-	public void testSaveHandyWorker() {
-
-		final HandyWorker handyWorker = this.handyWorkerService.create();
-		handyWorker.setAddress("adres");
-
+	public void saveTest(){
+		final HandyWorker handyWorker = this.handyWorkerService.findOne(1313);
+		handyWorker.setName("Berto");
 		this.handyWorkerService.save(handyWorker);
+		Assert.notNull(this.handyWorkerService.findAll().contains(handyWorker));
 	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void testDeleteHandyWorker() {
-
-		final HandyWorker handyWorker = this.handyWorkerService.findOne(1308);
-
-		this.handyWorkerService.delete(handyWorker);
-		this.handyWorkerService.findOne(1308);
-		super.authenticate(null);
-
-	}
-
-	//	@Test
-	//	public void addMessageBox() {
-	//		final HandyWorker handyWorker = this.handyWorkerService.create();
-	//		handyWorker.setAddress("adres");
-	//
-	//		final HandyWorker handy = this.handyWorkerService.save(handyWorker);
-	//
-	//		this.messageboxService.addDefaultMessageBoxs(handy);
-	//
-	//		handy.setMessageBoxes(this.messageboxService.getMessageBoxsByActor(handy.getId()));
-	//		final HandyWorker res = this.handyWorkerService.findOne(handy.getId());
-	//	}
 
 }

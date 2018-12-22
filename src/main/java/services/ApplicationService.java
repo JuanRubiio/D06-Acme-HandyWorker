@@ -16,7 +16,6 @@ import security.Authority;
 import domain.Actor;
 import domain.Application;
 import domain.CreditCard;
-import domain.FixUpTask;
 
 @Service
 @Transactional
@@ -27,14 +26,10 @@ public class ApplicationService {
 	@Autowired
 	private ActorService			actorService;
 
-
-	//�Deber�a poner FixUpTaskService?
-
-	public Application create(final FixUpTask fixUpTask) {
+	public Application create(final Integer applicationId) {
 
 		final Application res = new Application();
-		Assert.notNull(fixUpTask);
-		res.setFixUpTask(fixUpTask);
+		Assert.notNull(applicationId);
 		final Actor actor = this.actorService.getPrincipal();
 		final Collection<Authority> autorities = actor.getUserAccount().getAuthorities();
 		final ArrayList<String> listAuth = new ArrayList<String>();
@@ -45,7 +40,7 @@ public class ApplicationService {
 
 		Assert.isTrue(listAuth.contains("HANDYWORKER"));
 		res.setMoment(new Date());
-		//�Hace falta meter una CreditCard?, ya que es un atributo opcional
+		
 		return res;
 	}
 

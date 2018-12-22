@@ -7,9 +7,9 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.util.Assert;
 
 import domain.Application;
-import domain.FixUpTask;
 import domain.Phase;
 
 import utilities.AbstractTest;
@@ -24,26 +24,41 @@ public class PhaseServiceTest extends AbstractTest{
 	private PhaseService phaseService;
 	@Autowired
 	private ApplicationService applicationService;
-	@Autowired
-	private FixUpTaskService fixUpTaskService;
+	
+	@Test
+	public void testCreatePhase(){
+		super.authenticate("handyWorker1");
+		Phase phase = new Phase();
+		Application app = this.applicationService.findOne(1429);
+		phase = this.phaseService.create(app);
+		Assert.notNull(phase);
+	}
 	
 	@Test
 	public void testSavePhase(){
 		super.authenticate("handyWorker1");
-		final FixUpTask fixUpTask = this.fixUpTaskService.create();
-		final Application application = this.applicationService.create(fixUpTask);	
-		final Phase phase = this.phaseService.create(application);
+		Application application = this.applicationService.findOne(1429);
+		Phase phase = this.phaseService.create(application);
+		phase.setDescription("Hola caracola");
+		phase.setTitle("Hi");
 		this.phaseService.save(phase);
-	
+		Assert.notNull(phase);
 	}
+	
+	@Test
+	public void findOneTest() {
+		final Phase phase = this.phaseService.findOne(1424);
+		Assert.notNull(phase);
+	}
+	
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void testDeletePhase() {
 		super.authenticate("handyWorker1");
-		final Phase phase = this.phaseService.findOne(1423);
+		final Phase phase = this.phaseService.findOne(1424);
 
 		this.phaseService.delete(phase);
-		this.phaseService.findOne(1423);
+		this.phaseService.findOne(1824);
 		super.authenticate(null);
 	}
 	
