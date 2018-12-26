@@ -2,6 +2,7 @@
 package services;
 
 import java.util.Collection;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -72,4 +73,16 @@ public class ApplicationServiceTest extends AbstractTest {
 		Assert.notEmpty(application);
 	}
 
+	@Test
+	public void findApplicationByFixUpTaskOfCustomerTest(){
+		final List<Application> application = this.applicationService.findApplicationByFixUpTaskOfCustomer(1343);
+		Assert.notNull(application);
+	}
+	
+	@Test
+	public void findApplicationByHandyWorkerTest(){
+		final List<Application> application = this.applicationService.findApplicationByHandyWorker(1313);
+		Assert.notNull(application);
+	}
+	
 }

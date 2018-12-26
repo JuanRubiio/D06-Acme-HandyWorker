@@ -1,7 +1,7 @@
 
 package repositories;
 
-import java.util.Collection;
+import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -20,6 +20,6 @@ public interface FixUpTaskRepository extends JpaRepository<FixUpTask, Integer> {
 	//Enunciado: Filtrar las TAREAS por los ESTADOS de un MANITAS
 	//select f from FixUpTask f join f.applications a where a.id=(select a.id from Application a where (a.handyWorker=1308 AND a.status='ACCEPTED'));
 	@Query("select f from FixUpTask f join f.applications a where a.id=(select a.id from Application a where (a.handyWorker= ?1 AND a.status='?2'))")
-	Collection<FixUpTask> ListingFixUpTaskByHandyWorker(int handyWorkerId, String status);
+	List<FixUpTask> ListingFixUpTaskByHandyWorker(int handyWorkerId, String status);
 
 }

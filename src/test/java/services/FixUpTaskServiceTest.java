@@ -2,6 +2,7 @@
 package services;
 
 import java.util.Collection;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -59,4 +60,18 @@ public class FixUpTaskServiceTest extends AbstractTest {
 		super.authenticate(null);
 	}
 
+	@Test
+	public void ListingFixUpTaskByHandyWorkerTest1(){
+		final List<FixUpTask> res = this.fixUpTaskService.ListingFixUpTaskByHandyWorker(1308, "ACCEPTED");
+		Assert.notNull(res);
+		//System.out.println("Aceptados"+res);
+	}
+	
+	@Test
+	public void ListingFixUpTaskByHandyWorkerTest2(){
+		final List<FixUpTask> res = this.fixUpTaskService.ListingFixUpTaskByHandyWorker(1308, "REJECTED");
+		Assert.notNull(res);
+		//System.out.println("Rechazados"+res);
+	}
+	
 }

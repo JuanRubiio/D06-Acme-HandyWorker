@@ -4,6 +4,7 @@ package services;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -16,6 +17,7 @@ import security.Authority;
 import domain.Actor;
 import domain.Application;
 import domain.CreditCard;
+import domain.FixUpTask;
 
 @Service
 @Transactional
@@ -24,7 +26,10 @@ public class ApplicationService {
 	@Autowired
 	private ApplicationRepository	applicationRepository;
 	@Autowired
-	private ActorService			actorService;
+	private ActorService	actorService;
+	@Autowired
+	private FixUpTaskService	fixUpTaskService;
+	
 
 	public Application create(final Integer applicationId) {
 
@@ -80,5 +85,38 @@ public class ApplicationService {
 		return res;
 
 	}
+	
+	public List<Application> findApplicationByFixUpTaskOfCustomer(Integer customId){
+		List<FixUpTask> allFUT = new ArrayList<FixUpTask>(); 
+		allFUT.addAll(this.fixUpTaskService.findAll());
+		List<FixUpTask> customerFUT = new ArrayList<FixUpTask>(); 
+		List<Application> res = new ArrayList<Application>();
+		Integer i=0;
+		for(i=0;i<allFUT.size();i++){
+			if(allFUT.get(i).getCustomer().getId()==customId){
+				customerFUT.add(allFUT.get(i));
+			}
+		}
+		for(i=0;i<customerFUT.size();i++){
+			res.addAll(customerFUT.get(i).getApplications());
+		}
+		
+		System.out.println("findApplicationByFixUpTaskOfCustomer"+res);
+		return res;
+	}
 
+	public List<Application> findApplicationByHandyWorker (Integer handyworkerId){
+		List<Application> res = new ArrayList<Application>(); 
+		List<Application> allApplication = new ArrayList<Application>(); 
+		allApplication.addAll(findAll());
+		Integer i=0;
+		for(i=0;i<allApplication.size();i++){
+			if(allApplication.get(i).getHandyWorker().getId()==handyworkerId){
+				res.add(allApplication.get(i));
+			}
+		}
+		System.out.println("findApplicationByHandyWorker"+res);
+		return res;
+	}
+	
 }

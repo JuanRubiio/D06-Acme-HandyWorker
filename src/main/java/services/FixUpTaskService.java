@@ -4,6 +4,7 @@ package services;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -14,6 +15,7 @@ import org.springframework.util.Assert;
 import repositories.FixUpTaskRepository;
 import security.Authority;
 import domain.Actor;
+import domain.Application;
 import domain.Customer;
 import domain.FixUpTask;
 
@@ -24,8 +26,9 @@ public class FixUpTaskService {
 	@Autowired
 	private FixUpTaskRepository	fixUpTaskRepository;
 	@Autowired
-	private ActorService		actorService;
-
+	private ActorService	actorService;
+	@Autowired
+	private ApplicationService	 applicationService;
 	@Autowired
 	private UtilitiesService	utilitiesService;
 
@@ -89,6 +92,25 @@ public class FixUpTaskService {
 		Assert.isTrue(listAuth.contains("CUSTOMER"));
 
 		this.fixUpTaskRepository.delete(fixUpTask);
+	}
+	
+	public List<FixUpTask> ListingFixUpTaskByHandyWorker(Integer handyWorkerId,String status){
+		List<FixUpTask> res = new ArrayList<FixUpTask>(); 
+		List<Application> hwApp = new ArrayList<Application>();
+		List<Application> allApp = new ArrayList<Application>();
+		allApp.addAll(this.applicationService.findAll());
+		Integer i=0;
+		for(i=0;i<allApp.size();i++){
+			if(allApp.get(i).getHandyWorker().getId()==handyWorkerId && allApp.get(i).getStatus().contentEquals(status)){
+				hwApp.add(allApp.get(i));
+			}
+		}
+		
+		for(i=0;i<hwApp.size();i++){
+			res.add(hwApp.get(i).getFixUpTask());
+		}
+		
+		return res;
 	}
 
 }
