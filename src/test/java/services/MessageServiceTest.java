@@ -53,6 +53,7 @@ public class MessageServiceTest extends AbstractTest {
 
 	}
 
+	//Sigue sin funcionar
 	//	@Test
 	//	public void broadcastTest() {
 	//		super.authenticate("administrator1");
@@ -67,5 +68,26 @@ public class MessageServiceTest extends AbstractTest {
 	//		this.messageService.broadcast(mes);
 	//
 	//	}
+
+	@Test
+	public void deleteTest() {
+		super.authenticate("administrator1");
+		final Message mes = this.messageService.create();
+
+		Assert.notNull(mes);
+		final Actor act = this.actorService.findOne(1308);
+		mes.setRecipient(act);
+		mes.setSubject("Hola");
+		mes.setBody("amigos");
+		mes.setPriority("LOW");
+
+		final Message del = this.messageService.save(mes);
+
+		this.messageService.delete(del.getId());
+		this.messageService.delete(del.getId());
+
+		Assert.isTrue(!this.messageService.checkPrincipalActor(del));
+
+	}
 
 }
