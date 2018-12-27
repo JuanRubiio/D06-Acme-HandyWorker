@@ -13,8 +13,7 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 
-<display:table name="configuration" requestURI="configuration/administrator/show.do" class="displaytag">
-
+<display:table name="configuration" requestURI="configuration/administrator/show.do" id ="row" class="displaytag">
 	<display:column property="banner" titleKey="configuration.banner"/>
 	<display:column property="welcomMessage" titleKey="configuration.welcomMessage"/>
 	<display:column property="welcomMessageEs" titleKey="configuration.welcomMessageEs"/>
@@ -28,6 +27,8 @@
 	<display:column property="negativeSpanishWords" titleKey="configuration.negativeSpanishWords"/>
 	<display:column property="positiveEnglishWords" titleKey="configuration.positiveEnglishWords"/>
 	<display:column property="negativeEnglishWords" titleKey="configuration.negativeEnglishWords"/>
+
+
 
 </display:table>
 <br />

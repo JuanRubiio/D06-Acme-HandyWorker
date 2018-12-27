@@ -68,6 +68,9 @@ public class MessageServiceTest extends AbstractTest {
 	//		this.messageService.broadcast(mes);
 	//
 	//	}
+	//
+	//
+	//
 
 	@Test
 	public void deleteTest() {
