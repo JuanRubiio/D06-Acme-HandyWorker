@@ -547,7 +547,7 @@
 		<property name="spamWords" value="one million" />
 	</bean>
 	<bean id="spam5" class="domain.Spam">
-		<property name="spamWords" value="wou've been selected" />
+		<property name="spamWords" value="you've been selected" />
 	</bean>
 	<bean id="spam6" class="domain.Spam">
 		<property name="spamWords" value="Nigeria" />

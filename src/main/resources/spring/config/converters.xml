@@ -20,6 +20,11 @@
 	<util:list id="converters">
 			<bean class="converters.StringToConfiguration" /> 
 			<bean class="converters.ConfigurationToString" /> 
+			
+			<bean class="converters.StringToSpam" /> 
+			<bean class="converters.SpamToString" /> 
+			
+			
 	</util:list>
 	
 </beans>

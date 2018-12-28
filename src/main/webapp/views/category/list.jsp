@@ -30,17 +30,17 @@
 
 	<display:column titleKey="category.espName">
 
-		<a href="category/listchildren.do?categoryId=${row.id}">${row.name}</a>
+		<a href="category/listchildren.do?categoryId=${row.id}">${row.espName}</a>
 	</display:column>
 
-	<display:column titleKey="category.espName">
-		<a href="category/listchildren.do?categoryId=${row.id}">${row.name}</a>
+	<display:column titleKey="category.engName">
+		<a href="category/listchildren.do?categoryId=${row.id}">${row.engName}</a>
 	</display:column>
 
 	<display:column titleKey="category.father">
 		<jstl:choose>
 			<jstl:when test="${row.father.name == 'CATEGORY'}">
-				<a href="category/list.do">${row.father.name}</a>
+				<a href="category/list.do">${row.father.engName}</a>
 			</jstl:when>
 			<jstl:otherwise>
 				<a
