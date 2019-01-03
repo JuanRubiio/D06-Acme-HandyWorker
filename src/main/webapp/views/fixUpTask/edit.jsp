@@ -11,70 +11,117 @@
 
 <form:form action="fixUpTask/customer/edit.do"
 	modelAttribute="fixUpTask" method="post">
+
+	<form:hidden path="id" />
+	<form:hidden path="version" />
+	<form:hidden path="ticker" />
+	<form:hidden path="moment" />
+	<form:hidden path="customer" />
+
 	<security:authorize access="hasRole('REFEREE')">
-		<form:hidden path="id" />
-		<form:hidden path="version" />
-		<form:hidden path="ticker" />
-		<form:hidden path="moment" />
-		<form:hidden path="category" />
-		<form:hidden path="warranty" />
-		<form:hidden path="applications" />
-		<form:hidden path="customer" />
-
-		<jstl:if test="${fixUpTask.version==0 }">
-
-			<form:label path="description">
-				<spring:message code="fixUpTask.description" />:
-			</form:label>
-			<form:input path="description" placeholder="${fixUpTask.description}" />
-			<form:errors cssClass="error" path="description" />
-			<br />
-
-
-
-		</jstl:if>
 
 		<form:label path="description">
 			<spring:message code="fixUpTask.description" />:
-	</form:label>
-		<form:input path="description" placeholder="${fixUpTask.description}" />
+		</form:label>
+		<jstl:if test="${fixUpTask.version==0 }">
+			<form:input path="description" />
+		</jstl:if>
+		<form:input path="description" value="${fixUpTask.description}" />
 		<form:errors cssClass="error" path="description" />
 		<br />
 
+
 		<form:label path="address">
 			<spring:message code="fixUpTask.address" />:
-	</form:label>
-		<form:input path="address" placeholder="${fixUpTask.address}" />
+		</form:label>
+		<jstl:if test="${fixUpTask.version==0 }">
+			<form:input path="address" />
+		</jstl:if>
+		<form:input path="address" value="${fixUpTask.address}" />
 		<form:errors cssClass="error" path="address" />
 		<br />
 
+
 		<form:label path="minPrice">
 			<spring:message code="fixUpTask.minPrice" />:
-	</form:label>
+		</form:label>
+		<jstl:if test="${fixUpTask.version==0 }">
+			<form:input path="minPrice" />
+		</jstl:if>
 		<form:input path="minPrice" placeholder="${fixUpTask.minPrice}" />
 		<form:errors cssClass="error" path="minPrice" />
 		<br />
 
+
 		<form:label path="maxPrice">
 			<spring:message code="fixUpTask.maxPrice" />:
-	</form:label>
+		</form:label>
+		<jstl:if test="${fixUpTask.version==0 }">
+			<form:input path="maxPrice" />
+		</jstl:if>
 		<form:input path="maxPrice" placeholder="${fixUpTask.maxPrice}" />
 		<form:errors cssClass="error" path="maxPrice" />
 		<br />
 
+
 		<form:label path="minDate">
 			<spring:message code="fixUpTask.minDate" />:
-	</form:label>
+		</form:label>
+		<jstl:if test="${fixUpTask.version==0 }">
+			<form:input path="minDate" />
+		</jstl:if>
 		<form:input path="minDate" placeholder="${fixUpTask.minDate}" />
 		<form:errors cssClass="error" path="minDate" />
 		<br />
 
+
 		<form:label path="maxDate">
 			<spring:message code="fixUpTask.maxDate" />:
-	</form:label>
+		</form:label>
+		<jstl:if test="${fixUpTask.version==0 }">
+			<form:input path="maxDate" />
+		</jstl:if>
 		<form:input path="maxDate" placeholder="${fixUpTask.maxDate}" />
 		<form:errors cssClass="error" path="maxDate" />
 		<br />
+
+
+		<form:label path="category">
+			<spring:message code="fixUpTask.category" />:
+		</form:label>
+		<form:select id="categories" path="category">
+			<form:options items="${categories}" itemLabel="name" itemValue="id" />
+			<form:option value="0" label="----" />
+		</form:select>
+		<br />
+
+
+		<form:label path="warranty">
+			<spring:message code="fixUpTask.warranty" />:
+		</form:label>
+		<form:select id="warranties" path="warranty">
+			<form:options items="${warranties}" itemLabel="title" itemValue="id" />
+			<form:option value="0" label="----" />
+		</form:select>
+		<br />
+
+
+		<form:label path="applications">
+			<spring:message code="fixUpTask.applications" />:
+		</form:label>
+		<form:select id="applications" path="application">
+			<form:options items="${applications}" itemLabel="id" itemValue="id" />
+			<form:option value="0" label="----" />
+		</form:select>
+		<input type="submit" name="addApplication">
+		<i class="fas fa-plus"></i>
+		</input>
+		<!-- boton añadir application -->
+		<br />
+		<!-- boton guardar -->
+		<!-- boton cancelar -->
+
+
 
 
 		<input type="submit" name="save"
