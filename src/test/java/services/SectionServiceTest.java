@@ -25,6 +25,7 @@ public class SectionServiceTest extends AbstractTest {
 
 	@Test
 	public void createTest() {
+		super.authenticate("handyworker1");
 		Section section = new Section();
 		section = this.sectionService.create(1415);
 		Assert.notNull(section);
@@ -32,11 +33,20 @@ public class SectionServiceTest extends AbstractTest {
 
 	@Test
 	public void saveTest() {
+
 		final Section section = this.sectionService.findOne(1412);
 		section.setTitle("Titulo");
 		this.sectionService.save(section);
 		Assert.isTrue(this.sectionService.findAll().contains(section));
 	}
-	//implementar delete
+	@Test(expected = IllegalArgumentException.class)
+	public void deleteTest() {
+		super.authenticate("handyworker1");
+		final Section section = this.sectionService.findOne(1412);
+
+		this.sectionService.delete(section);
+		Assert.isNull(this.sectionService.findOne(1412));
+		super.authenticate(null);
+	}
 
 }
