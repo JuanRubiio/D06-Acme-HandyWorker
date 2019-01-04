@@ -1,6 +1,7 @@
 
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
@@ -11,6 +12,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import repositories.TutorialRepository;
+import security.Authority;
+import domain.Actor;
 import domain.HandyWorker;
 import domain.Tutorial;
 
@@ -27,9 +30,18 @@ public class TutorialService {
 
 	//Supporting services
 	public Tutorial create(final HandyWorker handyWorker) {
-		final Tutorial res = new Tutorial();
-		Assert.isTrue(this.actorService.getPrincipal().getUserAccount().getAuthorities().contains("HANDYWORKER"));
 		Assert.notNull(handyWorker);
+		final Tutorial res = new Tutorial();
+
+		final Actor actor = this.actorService.getPrincipal();
+		final Collection<Authority> autorities = actor.getUserAccount().getAuthorities();
+		final ArrayList<String> listAuth = new ArrayList<String>();
+
+		if (!autorities.isEmpty())
+			for (final Authority au : autorities)
+				listAuth.add(au.getAuthority());
+
+		Assert.isTrue(listAuth.contains("HANDYWORKER"));
 		res.setHandyWorker(handyWorker);
 		res.setMomentCreate(new Date());
 		return res;

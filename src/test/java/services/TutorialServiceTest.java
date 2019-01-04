@@ -22,20 +22,37 @@ import domain.Tutorial;
 public class TutorialServiceTest extends AbstractTest {
 
 	@Autowired
-	private TutorialService	tutorialService;
-	private ActorService	actorService;
+	private TutorialService		tutorialService;
+
+	@Autowired
+	private HandyWorkerService	handyWorkerService;
 
 
 	@Test
 	public void createTest() {
 		super.authenticate("handyWorker1");
-		Tutorial tutorial = new Tutorial();
-		HandyWorker handyWorker = new HandyWorker();
-		handyWorker = (HandyWorker) this.actorService.getPrincipal();
-		handyWorker.setMark("Pepito chapuza");
-
-		tutorial = this.tutorialService.create(handyWorker);
+		final HandyWorker handyWorker = this.handyWorkerService.findOne(1313);
+		final Tutorial tutorial = this.tutorialService.create(handyWorker);
 		Assert.notNull(tutorial);
+	}
+
+	@Test
+	public void saveTest() {
+		super.authenticate("handyWorker1");
+		final Tutorial tutorial = this.tutorialService.findOne(1415);
+		tutorial.setTitle("Titulo nuevo");
+		this.tutorialService.save(tutorial);
+		Assert.isTrue(this.tutorialService.findOne(1415).getTitle().equals("Titulo nuevo"));
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void deleteTest() {
+		super.authenticate("handyworker1");
+		final Tutorial tutorial = this.tutorialService.findOne(1415);
+
+		this.tutorialService.delete(tutorial);
+		Assert.isNull(this.tutorialService.findOne(1415));
+		super.authenticate(null);
 	}
 
 }
