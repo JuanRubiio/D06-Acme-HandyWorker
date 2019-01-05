@@ -1,4 +1,3 @@
-
 package services;
 
 import java.util.ArrayList;
@@ -15,7 +14,10 @@ import repositories.CustomerRepository;
 import security.Authority;
 import security.UserAccount;
 import domain.Actor;
+import domain.Application;
+import domain.Curriculum;
 import domain.Customer;
+import domain.HandyWorker;
 
 @Service
 @Transactional
@@ -28,27 +30,39 @@ public class CustomerService {
 	@Autowired
 	private ActorService		actorService;
 
+	@Autowired
+	private MessageBoxService	messageboxService;
+	
+	public HandyWorker create() {
 
-	//Supporting services
-	public Customer create() {
-		Customer res;
-		res = new Customer();
+		HandyWorker res;
+		res = new HandyWorker();
 		final UserAccount userAccount = new UserAccount();
+		final Actor actor = this.actorService.getPrincipal();
+		final Collection<Authority> authorities2 = actor.getUserAccount().getAuthorities();
 		final List<Authority> authorities = new ArrayList<Authority>();
+		final ArrayList<String> listAuth = new ArrayList<String>();
 		final Authority authority = new Authority();
 		authority.setAuthority(Authority.CUSTOMER);
 		authorities.add(authority);
 		userAccount.setAuthorities(authorities);
 		res.setUserAccount(userAccount);
-
-		final Actor actor = this.actorService.getPrincipal();
-		final Collection<Authority> authoritiesa = actor.getUserAccount().getAuthorities();
-		final ArrayList<String> listAuth = new ArrayList<String>();
-		if (!authorities.isEmpty())
-			for (final Authority au : authoritiesa)
+		
+		
+		if(!authorities2.isEmpty())
+			for(final Authority au: authorities2)
 				listAuth.add(au.getAuthority());
+		Assert.isTrue(listAuth.contains("ADMIN"));
 		Assert.notNull(res);
-		//this.messageboxService.addDefaultMessageBoxs(res);
+						
+		final List<Application> applications = new ArrayList<Application>();
+		res.setApplications(applications);
+		
+		final Curriculum curriculum = new Curriculum();
+		res.setCurriculum(curriculum);
+		
+		this.messageboxService.addDefaultMessageBoxs(res);//Revisar el messageBox
+		
 		return res;
 	}
 
@@ -62,7 +76,7 @@ public class CustomerService {
 	}
 
 	public Collection<Customer> findAll() {
-		final Collection<Customer> res;
+		Collection<Customer> res;
 		res = this.customerRepository.findAll();
 		Assert.notNull(res);
 
@@ -70,21 +84,15 @@ public class CustomerService {
 	}
 
 	public Customer save(final Customer customer) {
-		Customer res;
+		Customer result;
+
 		Assert.notNull(customer);
-		//Assert.isTrue(customer.getName() != "");
-		//Assert.isTrue(customer.getSurname() != "");
-		final Actor actor = this.actorService.getPrincipal();
-		final Collection<Authority> authorities = actor.getUserAccount().getAuthorities();
-		final ArrayList<String> listAuth = new ArrayList<String>();
 
-		if (!authorities.isEmpty())
-			for (final Authority au : authorities)
-				listAuth.add(au.getAuthority());
+		result = this.customerRepository.save(customer);
 
-		res = this.customerRepository.save(customer);
-		Assert.notNull(res);
-		return res;
+		Assert.notNull(result);
+
+		return result;
 
 	}
 
