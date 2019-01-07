@@ -132,7 +132,7 @@
 
 	<input type="button" name="cancel"
 		value="<spring:message code="fixUpTask.cancel" />"
-		onclick="javascript: relativeRedir('fixUpTask/customer/list.do');" />
+		onclick="javascript: relativeRedir('fixUpTask/customer,handyWorker/list.do');" />
 
 
 </form:form>
