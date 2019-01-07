@@ -10,17 +10,23 @@
 
 package controllers;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.Locale;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import services.ConfigurationService;
+import domain.Configuration;
 
 @Controller
 @RequestMapping("/welcome")
 public class WelcomeController extends AbstractController {
+
+	@Autowired
+	private ConfigurationService	configurationService;
+
 
 	// Constructors -----------------------------------------------------------
 
@@ -31,18 +37,14 @@ public class WelcomeController extends AbstractController {
 	// Index ------------------------------------------------------------------		
 
 	@RequestMapping(value = "/index")
-	public ModelAndView index(@RequestParam(required = false, defaultValue = "John Doe") final String name) {
-		ModelAndView result;
-		SimpleDateFormat formatter;
-		String moment;
+	public ModelAndView index(final Locale locale) {
+		final ModelAndView res = new ModelAndView("welcome/index");
+		final Configuration configuration = this.configurationService.findAll().iterator().next();
+		if (locale.getLanguage().equals("es"))
+			res.addObject("name", configuration.getWelcomMessageEs());
+		else
+			res.addObject("name", configuration.getWelcomMessage());
 
-		formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-		moment = formatter.format(new Date());
-
-		result = new ModelAndView("welcome/index");
-		result.addObject("name", name);
-		result.addObject("moment", moment);
-
-		return result;
+		return res;
 	}
 }
