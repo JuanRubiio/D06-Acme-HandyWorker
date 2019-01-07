@@ -45,6 +45,8 @@
 		<value>/views/profile/tiles.xml</value>
 		<value>/views/tutorial/tiles.xml</value>
 		<value>/views/endorsement/tiles.xml</value>
+		<value>/views/socialProfile/tiles.xml</value>
+		
 		
 	</util:list>
 

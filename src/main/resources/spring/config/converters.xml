@@ -18,11 +18,20 @@
 	">
 
 	<util:list id="converters">
-			<bean class="converters.StringToConfiguration" /> 
-			<bean class="converters.ConfigurationToString" /> 
+			<bean class="converters.StringToConfigurationConverter" /> 
+			<bean class="converters.ConfigurationToStringConverter" /> 
 			
-			<bean class="converters.StringToSpam" /> 
-			<bean class="converters.SpamToString" /> 
+			<bean class="converters.StringToCategoryConverter" /> 
+			<bean class="converters.CategoryToStringConverter" /> 
+			
+			<bean class="converters.StringToActorConverter" /> 
+			<bean class="converters.ActorToStringConverter" /> 
+			
+			<bean class="converters.StringToSpamConverter" /> 
+			<bean class="converters.SpamToStringConverter" /> 
+			
+			<bean class="converters.StringToSocialProfileConverter" /> 
+			<bean class="converters.SocialProfileToStringConverter" /> 
 			
 			
 	</util:list>
