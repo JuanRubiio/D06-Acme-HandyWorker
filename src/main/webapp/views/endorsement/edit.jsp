@@ -27,7 +27,7 @@
 	<input type="submit" name="Save"
 		value="<spring:message code="endorsement.save"/>" />
 
-	<input type="submit" name="Cancel"
+	<input type="button" name="Cancel"
 		value="<spring:message code="endorsement.cancel" />"
 		onclick="javascript: relativeRedir('endorsement/endorser/list.do');" />
 
