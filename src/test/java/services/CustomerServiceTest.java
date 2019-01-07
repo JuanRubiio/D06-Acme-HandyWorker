@@ -26,18 +26,18 @@ public class CustomerServiceTest extends AbstractTest {
 	@Test
 	public void createTest() {
 		Customer customer = new Customer();
-		customer = this.customerService.create();
+		customer.setName("Kevin");
+		customer.setSurname("Durant");
+		customer.setEmail("durantula@gmail.com");
+		customer.setPhone("www.urlfoto.com/miphoto.php");
+		customer = this.customerService.save(customer);
 		Assert.notNull(customer);
 	}
 	@Test
 	public void saveTest() {
-		Customer customer = new Customer();
-		customer.setName("Manolito");
-		customer.setSurname("Perez");
-		customer.setEmail("manolito@correo.es");
-		customer.setPhoto("www.urldelafoto.com/mifoto.php");
-		customer = this.customerService.save(customer);
-		Assert.notNull(customer);
-
+		final Customer customer = this.customerService.findOne(1338);
+		customer.setName("William");
+		this.customerService.save(customer);
+		Assert.notNull(this.customerService.findAll().contains(customer));
 	}
 }
