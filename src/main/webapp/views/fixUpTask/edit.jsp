@@ -18,9 +18,7 @@
 	<form:hidden path="moment" />
 	<form:hidden path="customer" />
 
-	<security:authorize access="hasRole('REFEREE')">
-
-	</security:authorize>
+	
 	<form:label path="description">
 		<spring:message code="fixUpTask.description" />:
 		</form:label>

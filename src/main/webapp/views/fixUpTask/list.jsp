@@ -43,9 +43,11 @@
 	<display:column property="ticker" titleKey="fixUpTask.ticker" />
 	<display:column property="moment" titleKey="fixUpTask.moment" />
 </display:table>
-<spring:url
-	value="fixUpTask/customer/create.do"
-	var="add">
-	<i class="fas fa-plus"></i>
-</spring:url>
+<br />
+
+<security:authorize access="hasRole('CUSTOMER')">
+	<spring:url value="fixUpTask/customer/create.do" var="add">
+		<i class="fas fa-plus"></i>
+	</spring:url>
+</security:authorize>
 <br />

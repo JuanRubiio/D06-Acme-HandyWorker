@@ -16,22 +16,24 @@
 	requestURI="warranty/administrator/list.do" class="displaytag">
 	<display:column>
 		<security:authorize access="hasRole('ADMIN')">
-			<a href="warranty/administrator/show.do?warrantyId=${warranty.id}">show</a>
+			<spring:url
+				value="warranty/administrator/show.do?warrantyId=${warranty.id}"
+				var="show">
+				<i class="far fa-eye"></i>
+			</spring:url>
+			<jstl:if test="${warranty.draft }">
+			<spring:url
+				value="warranty/administrator/edit.do?warrantyId=${warranty.id}"
+				var="edit">
+				<i class="fas fa-pencil-alt"></i>
+			</spring:url>
+			<spring:url
+				value="warranty/administrator/delete.do?warrantyId=${fixUpTask.id}"
+				var="delete">
+				<i class="fas fa-trash-alt"></i>
+			</spring:url>
+			</jstl:if>
 		</security:authorize>
-	</display:column>
-	<display:column>
-		<jstl:if test="${warranty.draft }">
-			<security:authorize access="hasRole('ADMIN')">
-				<a href="warranty/administrator/edit.do?warrantyId=${warranty.id}">edit</a>
-			</security:authorize>
-		</jstl:if>
-	</display:column>
-	<display:column>
-		<jstl:if test="${warranty.draft }">
-			<security:authorize access="hasRole('ADMIN')">
-				<a href="warranty/administrator/edit.do?[POST:delete]">delete</a>
-			</security:authorize>
-		</jstl:if>
 	</display:column>
 	<display:column property="title" titleKey="warranty.title" />
 	<display:column property="terms" titleKey="warranty.terms" />
@@ -39,7 +41,12 @@
 	<display:column property="draft" titleKey="warranty.draft" />
 </display:table>
 <br />
+
 <security:authorize access="hasRole('ADMIN')">
-	<a href="warranty/administrator/create.do">Create new warranty</a>
+<spring:url
+	value="fixUpTask/customer/create.do"
+	var="add">
+	<i class="fas fa-plus"></i>
+</spring:url>
 </security:authorize>
 <br />
