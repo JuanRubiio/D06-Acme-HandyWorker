@@ -44,7 +44,7 @@ public interface AdministratorRepository extends JpaRepository<Administrator, In
 	@Query("select sum(case when a.status='REJECTED' then 1.00 else 0.00 end)/count(a)*1.0 from Application a")
 	Double query10();
 
-	@Query("select min(f.complaints.size), max(f.complaints.size), avg(f.complaints.size), stddev(f.complaints.size) from FixUpTask f")
+	@Query("select min(a.complaints.size), max(a.complaints.size), avg(a.complaints.size), stddev(a.complaints.size) from Application a join a.fixUpTask f")
 	List<Object> query11();
 
 	@Query("select min(r.collectionNotes.size), max(r.collectionNotes.size), avg(r.collectionNotes.size), stddev(r.collectionNotes.size)from Report r")
