@@ -2,6 +2,7 @@
 package services;
 
 import java.sql.Timestamp;
+import java.util.Collection;
 import java.util.Date;
 
 import javax.transaction.Transactional;
@@ -37,6 +38,13 @@ public class PhaseService {
 		Phase res;
 		Assert.notNull(phaseId);
 		res = this.phaseRepository.findOne(phaseId);
+		Assert.notNull(res);
+		return res;
+	}
+	
+	public Collection<Phase> findAll(){
+		Collection<Phase> res;
+		res=this.phaseRepository.findAll();
 		Assert.notNull(res);
 		return res;
 	}

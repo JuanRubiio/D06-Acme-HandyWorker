@@ -17,8 +17,8 @@
 <tiles-definitions>
 
 	<definition name="phase/new" extends="master.page">	
-		<put-attribute name="title" value="Phase: New" />
-		<put-attribute name="body" value="/views/phase/new.jsp" />
+		<put-attribute name="title" value="Phase: List" />
+		<put-attribute name="body" value="/views/phase/list.jsp" />
 	</definition>
 	
 	<definition name="phase/edit" extends="master.page">	

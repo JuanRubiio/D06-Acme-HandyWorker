@@ -13,7 +13,7 @@ public interface ApplicationRepository extends JpaRepository<Application,Integer
 	
 	//Enunciado: Seleccionar las SOLICITUDES para las TAREAS del CLIENTE
 	//select app from Application app where app.fixUpTask.id =(select f from FixUpTask f where f.customer.id= parametroID);
-	//FALLO
+	//FALLABA, el que esta en servicios funciona.
 	@Query("select app from Application app where app.fixUpTask.id =(select f from FixUpTask f where f.customer.id= ?1)")
 	List<Application> findApplicationByFixUpTaskOfCustomer(int customId);
 	

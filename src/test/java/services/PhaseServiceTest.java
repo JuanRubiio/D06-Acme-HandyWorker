@@ -1,5 +1,7 @@
 package services;
 
+import java.util.Collection;
+
 import javax.transaction.Transactional;
 
 import org.junit.Test;
@@ -51,6 +53,11 @@ public class PhaseServiceTest extends AbstractTest{
 		Assert.notNull(phase);
 	}
 	
+	@Test
+	public void findAllTest(){
+		final Collection<Phase> phase = this.phaseService.findAll();
+		Assert.notNull(phase);
+	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void testDeletePhase() {

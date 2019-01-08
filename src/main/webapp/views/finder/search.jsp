@@ -61,11 +61,11 @@
 		<form:errors ccClass="error" path="maxDate"/>
 		<br />
 		
-		<form:label path="LastDate">
-			<spring:message code="finder.LastDate" />
+		<form:label path="lastDate">
+			<spring:message code="finder.lastDate" />
 		</form:label>
-		<form:input path="LastDate" placeholder="dd/MM/yyyy HH:mm"/>
-		<form:errors ccClass="error" path="LastDate"/>
+		<form:input path="lastDate" placeholder="dd/MM/yyyy HH:mm"/>
+		<form:errors ccClass="error" path="lastDate"/>
 		<br />
 	
 		<%-- warranty --%>
@@ -85,8 +85,6 @@
 		</form:select>	
 	
 		<input type="submit" name="save" value="<spring:message code="finder.save"/>"/>
-		<input type="button" name="cancel" value="<spring:message code="finder.cancel"/>"
-			onclick="javascript: relativeRedir('handyWorker/show.do');"/>
 		
 	</form:form>
 

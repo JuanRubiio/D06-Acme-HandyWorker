@@ -16,6 +16,7 @@ import org.springframework.util.Assert;
 import utilities.AbstractTest;
 import domain.Application;
 import domain.CreditCard;
+import domain.FixUpTask;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
@@ -29,11 +30,15 @@ public class ApplicationServiceTest extends AbstractTest {
 	
 	@Autowired
 	private CreditCardService creditCardService;
+	
+	@Autowired
+	private FixUpTaskService fixUpTaskService;
 
 	@Test
 	public void testCreateApplication() {
 		super.authenticate("handyWorker1");
-		final Application application = this.applicationService.create(1425);
+		final FixUpTask fixUpTask = this.fixUpTaskService.findOne(1425);
+		final Application application = this.applicationService.create(fixUpTask);
 		//Sin los 2 set funciona bien tambien
 		application.setPrice(174.0);
 		application.setHandyWorkerComments("¿Como estan ustedes?");

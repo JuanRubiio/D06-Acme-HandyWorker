@@ -24,53 +24,59 @@
 		
 		<form:hidden path="id"/>
 		<form:hidden path="version"/>
-
+		<form:hidden path="handyWorker"/>
+		<form:hidden path="workplan"/>
+		<form:hidden path="fixUpTask"/>
 
 		<form:label path="moment">
-			<spring:message code="application.moment" />: ${application.moment}
+			<spring:message code="application.moment" />:
 		</form:label>
+		<form:input path="moment" value="${application.moment}" readonly="true"/>		
 		<br />
+		
 		<form:label path="price">
-			<spring:message code="application.price" />: ${application.price}
+			<spring:message code="application.price" />: 
 		</form:label>
+		<form:input path="price" value="${application.price}" readonly="true"/>
 		<br />
 
 		<%-- IF status.Accepted --%>
 		<jstl:if test="${application.status=='ACCEPTED'}">
 			<form:label path="status">
-				<spring:message code="application.status" />: ${application.status}
+				<spring:message code="application.status" />: 
 			</form:label>
+			<form:input path="status" value="${application.status}" readonly="true"/>
 			<br />
+			
 			<form:label path="creditCard">
-				<spring:message code="application.creditCard" />: ${application.creditCard}
+				<spring:message code="application.creditCard" />: 
 			</form:label>
+			<form:input path="creditCard" value="${application.creditCard}" readonly="true"/>
 			<br />
 		
-		<%-- workplan --%>
-		<form:select path="phase">
-			<form:options
-				items="${phase}" 
-				itemLabel="phase"
-				itemValue="phase"/>
-		</form:select>	
-		<%-- FIN --%>
-		<br />
-		<a href="phase/show.do?phaseId=${phase.id}">show</a>	
-		<br />
-		<a href="phase/new.do">Create new phase</a>
+			<form:label path="workplan">
+				<spring:url value="phase/show.do?phaseId={phase}">
+					<i class="fas fa-plus"></i>
+					<spring:param name="phase" value="${phase.id}"/>
+				</spring:url>
+			</form:label>
 		</jstl:if>
 		<%-- ENDIF --%>
 	
 		<form:label path="handyWorkerComments">
-			<spring:message code="application.handyWorkerComments" />: ${application.handyWorkerComments}
+			<spring:message code="application.handyWorkerComments" />: 
 		</form:label>
+		<form:input path="handyWorkerComments" value="${application.handyWorkerComments}" readonly="true"/>
+		<br/>
 		<form:label path="CustomerComments">
-			<spring:message code="application.CustomerComments" />: ${application.CustomerComments}
+			<spring:message code="application.CustomerComments" />: 
 		</form:label>
+		<form:input path="CustomerComments" value="${application.CustomerComments}" readonly="true"/>
 		<br />
 		
-		<a href="application/list.do">Back</a>
-		
+		<spring:url value="application/list.do">
+			<i class="fas fa-backward">Back</i>
+		</spring:url>
 	</form:form>
 
 </security:authorize>

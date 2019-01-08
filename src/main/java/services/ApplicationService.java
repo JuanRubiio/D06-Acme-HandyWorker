@@ -31,10 +31,10 @@ public class ApplicationService {
 	private FixUpTaskService	fixUpTaskService;
 	
 
-	public Application create(final Integer applicationId) {
+	public Application create(final FixUpTask fixUpTaskId) {
 
 		final Application res = new Application();
-		Assert.notNull(applicationId);
+		Assert.notNull(fixUpTaskId);
 		final Actor actor = this.actorService.getPrincipal();
 		final Collection<Authority> autorities = actor.getUserAccount().getAuthorities();
 		final ArrayList<String> listAuth = new ArrayList<String>();
