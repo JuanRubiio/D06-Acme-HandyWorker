@@ -25,6 +25,8 @@
 	<form:hidden path="body"/>
 	<form:hidden path="priority"/>
 	<form:hidden path="recipient"/>
+	<form:hidden path="tags"/>
+	
 	
 	<jstl:if test="${ folders.size()!=0 }">
 	<spring:message code="message.folder" />
