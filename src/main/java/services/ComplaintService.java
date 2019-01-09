@@ -21,30 +21,30 @@ public class ComplaintService {
 
 	//Managed repo
 	@Autowired
-	private ComplaintRepository	complaintRepository;
+	private static ComplaintRepository	complaintRepository;
 	@Autowired
-	private UtilitiesService	utilitiesService;
+	private static UtilitiesService		utilitiesService;
 
 
 	//Supporting services
-	public Complaint create() {
+	public static Complaint create() {
 		final Complaint res;
 		res = new Complaint();
 		res.setMoment(new Date());
-		res.setTicker(this.utilitiesService.generateTicker());
+		res.setTicker(ComplaintService.utilitiesService.generateTicker());
 		Assert.isTrue(res.getTicker().matches("\\d{6}-[A-Z]{4}"));
 
 		return res;
 	}
 
-	public Complaint save(final Complaint complaint) {
+	public static Complaint save(final Complaint complaint) {
 		Complaint res = new Complaint();
 		Assert.notNull(complaint);
 		Assert.notNull(complaint.getTicker());
 		Assert.isTrue(complaint.getTicker().matches("\\d{6}-[A-Z]{4}"));
 		Assert.isTrue(complaint.getDescription() != "");
 
-		res = this.complaintRepository.save(complaint);
+		res = ComplaintService.complaintRepository.save(complaint);
 		Assert.notNull(res);
 
 		return res;
@@ -53,15 +53,15 @@ public class ComplaintService {
 	public Complaint findOne(final Integer complaintId) {
 		Complaint res;
 		Assert.notNull(complaintId);
-		res = this.complaintRepository.findOne(complaintId);
+		res = ComplaintService.complaintRepository.findOne(complaintId);
 		Assert.notNull(res);
 
 		return res;
 	}
 
-	public Collection<Complaint> findAll() {
+	public static Collection<Complaint> findAll() {
 		Collection<Complaint> res;
-		res = this.complaintRepository.findAll();
+		res = ComplaintService.complaintRepository.findAll();
 		Assert.notNull(res);
 
 		return res;
@@ -72,8 +72,8 @@ public class ComplaintService {
 		final List<Integer> complaintsDelSistema = new ArrayList<Integer>();
 		int res = 0;
 
-		complaintsConReferee.addAll(this.complaintRepository.idQuejasConReferee());
-		complaintsDelSistema.addAll(this.complaintRepository.idTodasLasQuejas());
+		complaintsConReferee.addAll(ComplaintService.complaintRepository.idQuejasConReferee());
+		complaintsDelSistema.addAll(ComplaintService.complaintRepository.idTodasLasQuejas());
 
 		complaintsDelSistema.removeAll(complaintsConReferee);
 		res = complaintsDelSistema.get(0);
@@ -82,7 +82,7 @@ public class ComplaintService {
 	}
 
 	public Complaint obtieneQuejaSinReferee() {
-		final Complaint complaint = this.complaintRepository.findOne(this.obtieneIdQuejaSinReferee());
+		final Complaint complaint = ComplaintService.complaintRepository.findOne(this.obtieneIdQuejaSinReferee());
 		Assert.notNull(complaint);
 		return complaint;
 	}
