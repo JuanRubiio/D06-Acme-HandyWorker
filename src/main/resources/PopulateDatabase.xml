@@ -255,7 +255,7 @@
 		<property name="personalRecord" ref="personalRecord1" />
 		<property name="educationalRecords" ref="educationalRecord1" />
 		<property name="professionalRecords" ref="professionalRecord1" />
-		<property name="endoserRecords" ref="endorserRecord1" />
+		<property name="endorserRecords" ref="endorserRecord1" />
 		<property name="miscellaneousRecords" ref="miscellaneousRecord1" />
 
 	</bean>
@@ -265,7 +265,7 @@
 		<property name="personalRecord" ref="personalRecord2" />
 		<property name="educationalRecords" ref="educationalRecord2" />
 		<property name="professionalRecords" ref="professionalRecord2" />
-		<property name="endoserRecords" ref="endorserRecord2" />
+		<property name="endorserRecords" ref="endorserRecord2" />
 		<property name="miscellaneousRecords" ref="miscellaneousRecord2" />
 	</bean>
 

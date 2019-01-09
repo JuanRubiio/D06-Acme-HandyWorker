@@ -91,5 +91,17 @@ public class SponsorshipService {
 		return result;
 
 	}
+	
+	public void delete(final Sponsorship sponsorship) {
+		final Actor a = this.actorService.getPrincipal();
+		final Collection<Authority> authorities = a.getUserAccount().getAuthorities();
+		final ArrayList<String> listAuth = new ArrayList<String>();
+		if (!authorities.isEmpty())
+			for (final Authority au : authorities)
+				listAuth.add(au.getAuthority());
+		Assert.isTrue(listAuth.contains("SPONSOR"));
+		Assert.notNull(sponsorship);
+		sponsorshipRepository.delete(sponsorship);
+	}
 
 }

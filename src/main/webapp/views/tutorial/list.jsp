@@ -17,12 +17,9 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<h1> <jstl:out value="${folder.name}"/> </h1>
-
 <display:table name="tutorials" id="row" pagesize="5" requestURI="${requestUri}" class="displaytag">
 	
-	<spring:message code="tutorial.title" var="title" />
-	<display:column title="${title}" property="title" />
+	<display:column titlekey="tutorial.title" property="title" />
 	
 	<spring:message code="tutorial.momentUpdate" var="momentupdate" />
 	<display:column title="${momentUpdate}" >
@@ -30,7 +27,7 @@
 	</display:column>	
 	
 	<spring:message code="tutorial.summary" var="summary" />
-	<display:column title="${summary}" property="summary" />
+	<display:column title="${row.summary}" property="summary" />
 	
 	<security:authorize access="hasRole('HANDYWORKER')">
 		<display:column>

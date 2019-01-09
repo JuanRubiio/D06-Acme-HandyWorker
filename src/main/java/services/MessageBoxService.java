@@ -1,6 +1,7 @@
 
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.transaction.Transactional;
@@ -32,6 +33,8 @@ public class MessageBoxService {
 
 		res = new MessageBox();
 		res.setActor(this.actorService.getPrincipal());
+		final Collection<Message> messages = new ArrayList<>();
+		res.setMessages(messages);
 		res.setSystem(false);
 		return res;
 	}
@@ -75,28 +78,36 @@ public class MessageBoxService {
 		this.messageboxRepository.delete(messageBox);
 	}
 
-	public void addDefaultMessageBoxs(final Actor actor) {
+	public Collection<MessageBox> addDefaultMessageBoxs(final Actor actor) {
 		Assert.notNull(actor);
 
 		MessageBox f1, f2, f3, f4;
 
 		f1 = new MessageBox();
 		f1.setName("in box");
+		final Collection<Message> messages1 = new ArrayList<>();
+		f1.setMessages(messages1);
 		f1.setActor(actor);
 		f1.setSystem(true);
 
 		f2 = new MessageBox();
 		f2.setName("out box");
+		final Collection<Message> messages2 = new ArrayList<>();
+		f2.setMessages(messages2);
 		f2.setActor(actor);
 		f2.setSystem(true);
 
 		f3 = new MessageBox();
 		f3.setName("trash box");
+		final Collection<Message> messages3 = new ArrayList<>();
+		f3.setMessages(messages3);
 		f3.setActor(actor);
 		f3.setSystem(true);
 
 		f4 = new MessageBox();
 		f4.setName("spam box");
+		final Collection<Message> messages4 = new ArrayList<>();
+		f4.setMessages(messages4);
 		f4.setActor(actor);
 		f4.setSystem(true);
 
@@ -108,6 +119,14 @@ public class MessageBoxService {
 		Assert.notNull(f3);
 		f4 = this.messageboxRepository.save(f4);
 		Assert.notNull(f4);
+
+		final Collection<MessageBox> res = new ArrayList<MessageBox>();
+		res.add(f1);
+		res.add(f2);
+		res.add(f3);
+		res.add(f4);
+
+		return res;
 
 	}
 
@@ -138,55 +157,13 @@ public class MessageBoxService {
 		return MessageBox;
 	}
 
-	private MessageBox findSystemMessageBoxByActor(final String nameMessageBox, final int actorId) {
+	public MessageBox findSystemMessageBoxByActor(final String nameMessageBox, final int actorId) {
 		Assert.notNull(nameMessageBox);
 		MessageBox MessageBox;
 
 		MessageBox = this.messageboxRepository.findSystemMessageBox(nameMessageBox, actorId);
 		Assert.notNull(MessageBox);
 		return MessageBox;
-	}
-
-	public MessageBox getMessageBoxAndCheckSpam(final Message message, final Actor recipient, final Boolean broadcast) {
-		Assert.notNull(message);
-		MessageBox folder;
-		Collection<Spam> spamList;
-		final boolean isSpam = false;
-
-		spamList = this.spamService.findAll();
-
-		for (final Spam sp : spamList)
-			if (message.getBody().toLowerCase().contains(sp.getSpamWords().toLowerCase()) || message.getSubject().toLowerCase().contains(sp.getSpamWords().toLowerCase())) {
-				message.setSpam(true);
-				break;
-			}
-
-		if (isSpam) {
-			folder = this.findSystemFolderByActor("spam box", recipient.getId());
-			message.setSpam(true);
-			Actor enviador = null;
-			try {
-				enviador = message.getSender();
-				enviador.setSuspicious(true);
-				this.actorService.save(enviador);
-			} catch (final Throwable oops) {
-
-			}
-
-		} else if (broadcast)
-			folder = this.findSystemFolderByActor("notification box", recipient.getId());
-		else
-			folder = this.findSystemFolderByActor("in box", recipient.getId());
-		return folder;
-	}
-
-	private MessageBox findSystemFolderByActor(final String nameFolder, final int actorId) {
-		Assert.notNull(nameFolder);
-		MessageBox folder;
-
-		folder = this.messageboxRepository.findSystemMessageBox(nameFolder, actorId);
-		Assert.notNull(folder);
-		return folder;
 	}
 
 	public void getMessageBoxAndCheckSpam(final Message message, final Actor recipient) {
@@ -268,7 +245,7 @@ public class MessageBoxService {
 	}
 
 	public Collection<MessageBox> getMessageBoxesByMessageId(final int id) {
-		return this.getMessageBoxesByMessageId(id);
+		return this.messageboxRepository.getMessageBoxesByMessageId(id);
 	}
 
 }
