@@ -1,4 +1,3 @@
-
 package services;
 
 import java.util.ArrayList;
@@ -33,8 +32,7 @@ public class CustomerService {
 
 	@Autowired
 	private MessageBoxService	messageboxService;
-
-
+	
 	public HandyWorker create() {
 
 		HandyWorker res;
@@ -49,21 +47,22 @@ public class CustomerService {
 		authorities.add(authority);
 		userAccount.setAuthorities(authorities);
 		res.setUserAccount(userAccount);
-
-		if (!authorities2.isEmpty())
-			for (final Authority au : authorities2)
+		
+		
+		if(!authorities2.isEmpty())
+			for(final Authority au: authorities2)
 				listAuth.add(au.getAuthority());
 		Assert.isTrue(listAuth.contains("ADMIN"));
 		Assert.notNull(res);
-
+						
 		final List<Application> applications = new ArrayList<Application>();
 		res.setApplications(applications);
-
+		
 		final Curriculum curriculum = new Curriculum();
 		res.setCurriculum(curriculum);
-
+		
 		this.messageboxService.addDefaultMessageBoxs(res);//Revisar el messageBox
-
+		
 		return res;
 	}
 

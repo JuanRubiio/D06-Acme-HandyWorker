@@ -18,8 +18,9 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<display:table name="application" requestURI="application/customer/list.do" class="displaytag">
+<display:table name="${applications}" id="application" pagesize="5" requestURI="${requestURI}" class="displaytag">
 	<display:column property="ticker" title="application.fixUpTask.ticker"/>	
+	<display:column property="id" title="application.id"/>
 	<display:column property="moment" title="application.moment"/>
 	<display:column property="status" title="application.status"/>
 	<display:column property="price" title="application.price"/>
@@ -27,14 +28,22 @@
 		<security:authorize access="hasRole('CUSTOMER')">
 			<display:column property="handyWorker" title="application.handyWorker"/>
 			<display:column>
-				<a href="application/edit.do?applicationId=${application.id}">edit</a>
+				<spring:url value="application/edit.do?applicationId=${application.id}" var="pencil"/>
+				<img src="main/webapp/images/pencil.png"/>
+				
+			
 			</display:column>
 		</security:authorize>
 		<security:authorize access="hasRole('HANDYWORKER')">
-			<display:column property="handyWorker" title="application.handyWorker"/>
+			<display:column property="customer" title="application.customer"/>
 			<display:column>
-				<a href="application/show.do?applicationId=${application.id}">show</a>
+				<spring:url value="application/show.do?applicationId=${application.id}" var="eye"/>
+				<img src="main/webapp/images/eye.png"/>
+				
+			
 			</display:column>
+			<spring:url value="application/edit.do?" var="plus"/>
+			<img src="main/webapp/images/plus.png"/>
 		</security:authorize>
 	
 </display:table>

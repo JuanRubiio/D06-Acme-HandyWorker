@@ -84,6 +84,18 @@
 		<security:logout 
 			logout-success-url="/" 
 			invalidate-session="true" />
+			
+		<!-- Carlos -->	
+		<security:intercept-url pattern="/application/handyWorker/show.do" access="hasRole('HANDYWORKER')" /> 
+		<security:intercept-url pattern="/application/handyWorker/list.do" access="hasRole('HANDYWORKER')" /> 
+		<security:intercept-url pattern="/application/customer/list.do" access="hasRole('CUSTOMER')" /> 
+		<security:intercept-url pattern="/application/handyWorker/edit.do" access="hasRole('HANDYWORKER')" /> 
+		<security:intercept-url pattern="/application/customer/edit.do" access="hasRole('CUSTOMER')" /> 
+		<security:intercept-url pattern="/finder/handyWorker/search.do" access="hasRole('HANDYWORKER')" /> 
+		<security:intercept-url pattern="/phase/handyWorker/show.do" access="hasRole('HANDYWORKER')" /> 
+		<security:intercept-url pattern="/phase/handyWorker/edit.do" access="hasRole('HANDYWORKER')" /> 
+		<security:intercept-url pattern="/phase/handyWorker/list.do" access="hasRole('HANDYWORKER')" /> 
+			
 	</security:http>
 
 </beans>

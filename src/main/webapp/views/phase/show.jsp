@@ -26,27 +26,32 @@
 	<form:hidden path="startMoment"/>
 	
 	<form:label path="title">
-		<spring:message code="phase.title" />: ${phase.title}
+		<spring:message code="phase.title" />: 
 	</form:label>
+	<form:input path="title" value="${phase.title}" readonly="true"/>		
 	<br />
 	
 	<form:label path="description">
-		<spring:message code="phase.description" />: ${phase.description}
+		<spring:message code="phase.description" />: 
 	</form:label>
+	<form:input path="title" value="${phase.description}" readonly="true"/>		
 	<br />
 		
 	<form:label path="endMoment">
-		<spring:message code="phase.endMoment" />: ${phase.endMoment}
+		<spring:message code="phase.endMoment" />: 
 	</form:label>
-
-	<form:label path="ordered">
-		<spring:message code="phase.ordered" />: ${phase.ordered}
-	</form:label>
+	<form:input path="title" value="${phase.endMoment}" readonly="true"/>		
 	<br />
 
-	<a href="phase/edit.do?phaseId=${phase.id}">edit</a>	
-	<a href="phase/edit.do?[POST:delete]">delete</a>
-	<a href="application/handyWorker/show.do?ApplicationId=${application.id}">back</a>
+	<form:label path="ordered">
+		<spring:message code="phase.ordered" />: 
+	</form:label>
+	<form:input path="title" value="${phase.ordered}" readonly="true"/>		
+	<br />
+
+	<input type="submit" name="save" value="<spring:message code="phase.save"/>"/>
+	
+	<%-- <a href="phase/edit.do?[POST:delete]">delete</a> --%>
 	
 </form:form>
 

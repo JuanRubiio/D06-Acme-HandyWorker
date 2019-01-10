@@ -28,34 +28,55 @@
 	<form:label path="title">
 		<spring:message code="phase.title" />
 	</form:label>
-	<form:input path="title" placeholder="${phase.title}"/>
+	<jstl:if test="${phase.version==0}">
+		<form:input path="title"/>
+	</jstl:if>
+	<jstl:if test="${phase.version!=0}">
+		<form:input path="title" value="${phase.title}"/>
+	</jstl:if>
 	<form:errors ccClass="error" path="title"/>
 	<br />
 	
 	<form:label path="description">
 		<spring:message code="phase.description" />
 	</form:label>
-	<form:input path="description" placeholder="${phase.description}"/>
+	<jstl:if test="${phase.version==0}">
+		<form:input path="description"/>
+	</jstl:if>
+	<jstl:if test="${phase.version!=0}">
+		<form:input path="description" value="${phase.description}"/>
+	</jstl:if>
 	<form:errors ccClass="error" path="description"/>
 	<br />
 		
 	<form:label path="endMoment">
 		<spring:message code="phase.endMoment" />
 	</form:label>
-	<form:input path="endMoment" placeholder="${phase.endMoment}"/>
+	<jstl:if test="${phase.version==0}">
+		<form:input path="endMoment"/>
+	</jstl:if>
+	<jstl:if test="${phase.version!=0}">
+		<form:input path="endMoment" value="${phase.endMoment}"/>
+	</jstl:if>
 	<form:errors ccClass="error" path="endMoment"/>
 	<br />
 
 	<form:label path="ordered">
 		<spring:message code="phase.ordered" />
 	</form:label>
-	<form:input path="ordered" placeholder="${phase.ordered}"/>
+	<jstl:if test="${phase.version==0}">
+		<form:input path="ordered"/>
+	</jstl:if>
+	<jstl:if test="${phase.version!=0}">
+		<form:input path="ordered" value="${phase.ordered}"/>
+	</jstl:if>
 	<form:errors ccClass="error" path="ordered"/>
 	<br />
 
 	<input type="submit" name="save" value="<spring:message code="phase.save"/>"/>
-	<input type="button" name="cancel" value="<spring:message code="phase.cancel"/>"
-			onclick="javascript: relativeRedir('phase/show.do?phaseId=${phase.id}');"/>
+
+	<input type="button" name="cancel" value="<spring:message code="phase.edit.cancel"/>"
+			onclick="javascript: relativeRedir('phase/handyWorker/list.do');"/>
 	
 </form:form>
 
