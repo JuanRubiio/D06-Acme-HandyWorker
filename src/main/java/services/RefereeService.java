@@ -13,6 +13,7 @@ import org.springframework.util.Assert;
 
 import repositories.RefereeRepository;
 import security.Authority;
+import security.LoginService;
 import security.UserAccount;
 import domain.Actor;
 import domain.Referee;
@@ -92,6 +93,13 @@ public class RefereeService {
 
 		Assert.notNull(res);
 		return res;
+	}
+
+	public Referee findByPrincipal() {
+		Referee result;
+		result = this.refereeRepository.findByUserAccountId(LoginService.getPrincipal().getId());
+		Assert.notNull(result);
+		return result;
 	}
 
 }

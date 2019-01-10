@@ -27,7 +27,7 @@ public class ComplaintService {
 
 
 	//Supporting services
-	public static Complaint create() {
+	public Complaint create() {
 		final Complaint res;
 		res = new Complaint();
 		res.setMoment(new Date());
@@ -37,7 +37,7 @@ public class ComplaintService {
 		return res;
 	}
 
-	public static Complaint save(final Complaint complaint) {
+	public Complaint save(final Complaint complaint) {
 		Complaint res = new Complaint();
 		Assert.notNull(complaint);
 		Assert.notNull(complaint.getTicker());
@@ -59,7 +59,7 @@ public class ComplaintService {
 		return res;
 	}
 
-	public static Collection<Complaint> findAll() {
+	public Collection<Complaint> findAll() {
 		Collection<Complaint> res;
 		res = ComplaintService.complaintRepository.findAll();
 		Assert.notNull(res);
@@ -67,7 +67,7 @@ public class ComplaintService {
 		return res;
 	}
 
-	private Integer obtieneIdQuejaSinReferee() {
+	private static Integer obtieneIdQuejaSinReferee() {
 		final List<Integer> complaintsConReferee = new ArrayList<Integer>();
 		final List<Integer> complaintsDelSistema = new ArrayList<Integer>();
 		int res = 0;
@@ -81,9 +81,10 @@ public class ComplaintService {
 		return res;
 	}
 
-	public Complaint obtieneQuejaSinReferee() {
-		final Complaint complaint = ComplaintService.complaintRepository.findOne(this.obtieneIdQuejaSinReferee());
+	public static Complaint obtieneQuejaSinReferee() {
+		final Complaint complaint = ComplaintService.complaintRepository.findOne(ComplaintService.obtieneIdQuejaSinReferee());
 		Assert.notNull(complaint);
 		return complaint;
 	}
+
 }
