@@ -53,8 +53,6 @@
 	
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
 		
-		<security:intercept-url pattern="/curriculum/unauthenticated/list.do" access="isAnonymous()"/>
-		
 		<security:intercept-url pattern="/curriculum/handyWorker/**" access="hasRole('HANDYWORKER')"/>
 
 		<security:form-login 

@@ -20,7 +20,7 @@
 	<util:list id="converters">
 	
 		<bean class="converters.CurriculumToStringConverter"/>
-		<bean class="converters.StringToCurriculum"/>
+		<bean class="converters.StringToCurriculumConverter"/>
 		
 		<bean class="converters.EducationalRecordToStringConverter"/>
 		<bean class="converters.StringToEducationalRecordConverter"/>
