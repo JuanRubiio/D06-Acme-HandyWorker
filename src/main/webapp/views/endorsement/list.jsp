@@ -17,12 +17,12 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<h1> <jstl:out value="${folder.name}"/> </h1>
+<security:authorize access="hasAnyRole('HANDYWORKER','CUSTOMER')">
 
 <display:table name="endorsements" id="row" pagesize="5" requestURI="${requestUri}" class="displaytag">
 	
 	<spring:message code="endorsement.writeFor" var="writeFor" />
-	<display:column title="${writeFor}" property="writeFor" />
+	<display:column title="${writeFor}" property="writeFor.name" />
 	
 	<spring:message code="endorsement.moment" var="moment" />
 	<display:column title="${moment}" >
@@ -36,7 +36,7 @@
 		<display:column>
 		<input type="submit" name="edit"
 				value="<spring:message code="endorsement.edit" />"
-				onclick="javascript: relativeRedir('endorsement/endorser/edit.do?endorsementId={row.id}');" />
+				onclick="javascript: relativeRedir('endorsement/endorser/edit.do?endorsementId=${row.id}');" />
 		</display:column>
 	</security:authorize>
 	
@@ -49,7 +49,7 @@
 	</security:authorize>
 	
 	
-		<security:authorize access="hasRole('CUSTOMER'||'HANDYWORKER')">
+	<security:authorize access="hasRole('CUSTOMER'||'HANDYWORKER')">
 		<display:column titleKey="endorsement.show">
 			<input type="submit" name="show"
 				value="<spring:message code="endorsement.show" />"

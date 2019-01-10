@@ -24,8 +24,6 @@ public class EndorsementService {
 	private EndorsementRepository	endorsementRepository;
 	@Autowired
 	private ActorService			actorService;
-	@Autowired
-	private EndorserService			endorserService;
 
 
 	public Endorsement create(final Actor a2) {
@@ -110,18 +108,18 @@ public class EndorsementService {
 		this.endorsementRepository.delete(Endorsement);
 	}
 
-	public Collection<String> findByWriteFromComments(final int endorserID) {
+	public Collection<String> findByWriteFromComments(final int endorserSenderID) {
 
-		final Collection<String> res = this.endorsementRepository.findByWriteFromComments(endorserID);
+		final Collection<String> res = this.endorsementRepository.findByWriteFromComments(endorserSenderID);
 
 		Assert.notNull(res);
 
 		return res;
 	}
 
-	public Collection<String> findByWriteToComments(final int endorserID) {
+	public Collection<String> findByWriteToComments(final int endorserReceiverID) {
 
-		final Collection<String> res = this.endorsementRepository.findByWriteToComments(endorserID);
+		final Collection<String> res = this.endorsementRepository.findByWriteToComments(endorserReceiverID);
 
 		Assert.notNull(res);
 

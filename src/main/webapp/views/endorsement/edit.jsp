@@ -20,7 +20,7 @@
 	<form:label path="comments">
 		<spring:message code="endorsement.comments" />:
 	</form:label>
-	<form:input path="comments" placeholder="${endorsement.comments}"/>
+	<form:input path="comments"/>
 	<form:errors cssClass="error" path="comments" />
 	<br />
 	

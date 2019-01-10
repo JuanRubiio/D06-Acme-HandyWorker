@@ -1,3 +1,13 @@
+<%--
+ * action-1.jsp
+ *
+ * Copyright (C) 2018 Universidad de Sevilla
+ * 
+ * The use of this project is hereby constrained to the conditions of the 
+ * TDG Licence, a copy of which you may download from 
+ * http://www.tdg-seville.info/License.html
+ --%>
+
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 
@@ -7,41 +17,59 @@
 <%@taglib prefix="security"
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
-<%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<form:form action="tutorial/handyworker/show.do" modelAttribute="tutorial" method="post">
+<p>
 
-	<form:hidden path="id" />
-	<form:hidden path="version" />
 
-	<form:label path="title">
-		<spring:message code="tutorial.title" />: ${tutorial.title}
-	</form:label>
-
-	<form:label path="moment create">
-		<spring:message code="tutorial.momentCreate" />: ${tutorial.momentCreate}
-	</form:label>
+	<spring:message code="tutorial.title"></spring:message> <jstl:out value="${tutorial.title}"></jstl:out>
+	<br />
 	
-	<form:label path="moment update">
-		<spring:message code="tutorial.momentUpdate" />: ${tutorial.momentUpdate}
-	</form:label>
+	<spring:message code="tutorial.momentUpdate"></spring:message> <jstl:out value="${tutorial.momentUpdate}"></jstl:out>
+	<br />
 	
-	<form:label path="summary">
-		<spring:message code="tutorial.summary" />: ${tutorial.summary}
-	</form:label>
+	<spring:message code="tutorial.momentCreate"></spring:message> <jstl:out value="${tutorial.momentCreate}"></jstl:out>
+	<br />
 	
-	<form:label path="pictures">
-		<spring:message code="tutorial.pictures" />: ${tutorial.pictures}
-	</form:label>
-
-	<form:label path="handy worker">
-		<spring:message code="tutorial.handyWorker" />: ${tutorial.handyWorker}
-	</form:label>
+	<spring:message code="tutorial.summary"></spring:message> <jstl:out value="${tutorial.summary}"></jstl:out>
+	<br />
 	
+	<spring:message code="tutorial.pictures"></spring:message> <jstl:out value="${tutorial.pictures}"></jstl:out>
+	<br />
+	
+	<spring:message code="tutorial.handyWorker"></spring:message> <jstl:out value="${tutorial.handyWorker.name}"></jstl:out>
+	<br />
 
-	<input type="submit" name="Cancel"
-		value="<spring:message code="tutorial.cancel" />"
-		onclick="javascript: relativeRedir('tutorial/handyworker/list.do');" />
+		<fieldset>
+			<legend>
+				<b><spring:message code="tutorial.sections"></spring:message></b>
+			</legend>
+			<display:table name="sections" id="section"
+				pagesize="5" class="displaytag">
 
+				<spring:message code="curriculum.section.title" var="title"></spring:message>
+				<display:column property="title" title="${title}"
+					sortable="true" />
+					
+				<spring:message code="curriculum.section.orden" var="orden"></spring:message>
+				<display:column property="orden" title="${orden}"
+					sortable="true" />
 
-</form:form>
+			</display:table>
+			
+			<spring:message code="tutorial.listsections" var="listsections"></spring:message>
+			<input type="button" name="listsections" value="${listsections}"
+				onclick="javascript:relativeRedir('section/handyWorker/list.do')" />
+			
+			
+			
+		</fieldset>
+		
+
+<!-- Cancel -->
+
+	<security:authorize access="hasRole('HANDYWORKER')">	
+				<button type="button"
+					onclick="javascript: relativeRedir('tutorial/handyworker/list.do')">
+					<spring:message code="tutorial.return" />
+				</button>
+			</security:authorize>
