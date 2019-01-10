@@ -48,6 +48,8 @@
 		<value>/views/socialProfile/tiles.xml</value>
 		
 		
+		<value>/views/curriculum/tiles.xml</value>
+		
 	</util:list>
 
 </beans>
