@@ -24,18 +24,15 @@
 		<put-attribute name="body" value="/views/fixUpTask/showcustomer.jsp" />
 	</definition>
 
-	<definition name="fixUpTask/listhw" extends="master.page">
+	<definition name="fixUpTask/list" extends="master.page">
 		<put-attribute name="title" value="Lista de Tareas" />
-		<put-attribute name="body" value="/views/fixUpTask/listhw.jsp" />
+		<put-attribute name="body" value="/views/fixUpTask/customer,handyWorker.jsp" />
 	</definition>
-		<definition name="fixUpTask/listcustomer" extends="master.page">
-		<put-attribute name="title" value="Lista de Tareas" />
-		<put-attribute name="body" value="/views/fixUpTask/listcustomer.jsp" />
-	</definition>
+
 	
 		<definition name="customer/handyWorker" extends="master.page">
 		<put-attribute name="title" value="Mostrar clientes con tareas" />
-		<put-attribute name="body" value="/views/fixUpTask/customer.jsp" />
+		<put-attribute name="body" value="/views/handyWorker/customerFixUpTask.jsp" />
 	</definition>
 
 </tiles-definitions>

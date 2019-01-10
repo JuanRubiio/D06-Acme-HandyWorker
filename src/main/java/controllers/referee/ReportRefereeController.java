@@ -1,5 +1,5 @@
 
-package controllers;
+package controllers.referee;
 
 import java.util.Collection;
 
@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ReportService;
+import controllers.AbstractController;
 import domain.Report;
 
 @Controller
@@ -26,7 +27,7 @@ public class ReportRefereeController extends AbstractController {
 
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
-	public ModelAndView create(@RequestParam final int complaintId) {
+	public ModelAndView create(@RequestParam final Integer complaintId) {
 		ModelAndView res;
 		final Report report;
 		//hay q pasarle la queja lo qe nose es como
