@@ -73,6 +73,13 @@ public class WarrantyAdministratorController extends AbstractController {
 		return result;
 	}
 
+	public ModelAndView delete(@RequestParam final int warrantyId) {
+		final ModelAndView res = new ModelAndView();
+		this.warrantyService.delete(warrantyId);
+		res.addObject("redict:list.do");
+		return res;
+	}
+
 	//save
 	//borrar
 
@@ -91,20 +98,19 @@ public class WarrantyAdministratorController extends AbstractController {
 		return result;
 	}
 
-	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
-	public ModelAndView delete(final Warranty warranty, final BindingResult binding) {
-		ModelAndView res;
-
-		try {
-			this.warrantyService.delete(warranty);
-			res = new ModelAndView("redict:list.do");
-		} catch (final Throwable oops) {
-			res = this.createEditModelAndView(warranty, "warranty.commit.error");
-		}
-
-		return res;
-	}
-
+	//	@RequestMapping(value = "/delete", method = RequestMethod.POST, params = "delete")
+	//	public ModelAndView delete(final Integer warrantyId, final BindingResult binding) {
+	//		ModelAndView res = new ModelAndView();
+	//		final Warranty warranty = this.warrantyService.findOne(warrantyId);
+	//		try {
+	//			this.warrantyService.delete(warrantyId);
+	//			res.addObject("redict:list.do");
+	//		} catch (final Throwable oops) {
+	//			res = this.createEditModelAndView(warranty, "report.commit.error");
+	//		}
+	//
+	//		return res;
+	//	}
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@Valid final Warranty warranty, final BindingResult binding) {
 		ModelAndView res;
