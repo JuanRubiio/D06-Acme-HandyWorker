@@ -1,25 +1,21 @@
 package converters;
 
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
-import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
-import repositories.PhaseRepository;
-import domain.Phase;
+import domain.FixUpTask;
 
-@Component
-@Transactional
-public class StringToPhaseConverter implements Converter<String,Phase>{
+import repositories.FixUpTaskRepository;
 
-	@Autowired 
-	PhaseRepository phaseRepository;
+public class StringToFixUpTaskConverter implements Converter<String,FixUpTask>{
+
+	@Autowired
+	FixUpTaskRepository applicationRepository;
 	
 	@Override
-	public Phase convert(String text) {
-		Phase res;
+	public FixUpTask convert(String text) {
+		FixUpTask res;
 		int id;
 		
 		try{
@@ -27,7 +23,7 @@ public class StringToPhaseConverter implements Converter<String,Phase>{
 				res=null;
 			}else{
 				id = Integer.valueOf(text);
-				res = phaseRepository.findOne(id);
+				res = applicationRepository.findOne(id);
 			}
 		}catch(Throwable oops){
 			throw new IllegalArgumentException(oops);
@@ -35,5 +31,4 @@ public class StringToPhaseConverter implements Converter<String,Phase>{
 		
 		return res;
 	}
-	
 }

@@ -6,6 +6,7 @@ import java.util.Date;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
@@ -118,6 +119,7 @@ public class FixUpTask extends DomainEntity {
 	//-------------RelationShip------------------
 
 	private Customer				customer;
+	private Collection<Complaint>	complaints;
 	private Collection<Application>	applications;
 	private Warranty				warranty;
 	private Category				category;
@@ -132,6 +134,17 @@ public class FixUpTask extends DomainEntity {
 
 	public void setCustomer(final Customer customer) {
 		this.customer = customer;
+	}
+
+	@NotNull
+	@Valid
+	@OneToMany(cascade = CascadeType.ALL)
+	public Collection<Complaint> getComplaints() {
+		return this.complaints;
+	}
+
+	public void setComplaints(final Collection<Complaint> complaint) {
+		this.complaints = complaint;
 	}
 
 	@NotNull

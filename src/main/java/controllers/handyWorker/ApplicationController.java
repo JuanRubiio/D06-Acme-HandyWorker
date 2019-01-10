@@ -1,4 +1,4 @@
-package controllers.handyWorker;
+package controllers.HandyWorker;
 
 import javax.validation.Valid;
 

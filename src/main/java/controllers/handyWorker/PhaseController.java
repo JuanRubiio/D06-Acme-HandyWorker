@@ -1,4 +1,4 @@
-package controllers.handyWorker;
+package controllers.HandyWorker;
 
 import java.util.Collection;
 

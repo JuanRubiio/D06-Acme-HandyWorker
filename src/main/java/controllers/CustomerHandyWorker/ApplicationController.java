@@ -1,4 +1,4 @@
-package controllers.endorsement;
+package controllers.CustomerHandyWorker;
 
 import java.util.Collection;
 

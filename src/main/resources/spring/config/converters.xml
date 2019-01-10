@@ -22,6 +22,19 @@
 			Add your own converters using entries of the following form: 
 			<bean class="converters.Class1ToClass2" /> 
 		-->
+		
+		<bean class="converters.ApplicationToStringConverter" />
+		<bean class="converters.StringToApplicationConverter" />
+		
+		<bean class="converters.FixUpTaskToStringConverter" />
+		<bean class="converters.StringToFixUpTaskConverter" />
+		
+		<bean class="converters.HandyWorkerToStringConverter" />
+		<bean class="converters.StringToHandyWorkerConverter" />
+		
+		<bean class="converters.PhaseToStringConverter" />
+		<bean class="converters.StringToPhaseConverter" />
+		
 	</util:list>
 	
 </beans>
