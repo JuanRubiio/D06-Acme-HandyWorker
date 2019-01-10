@@ -1,6 +1,8 @@
 
 package services;
 
+import java.util.Collection;
+
 import javax.transaction.Transactional;
 
 import org.junit.Test;
@@ -12,6 +14,7 @@ import org.springframework.util.Assert;
 
 import utilities.AbstractTest;
 import domain.Finder;
+import domain.FixUpTask;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
@@ -29,6 +32,16 @@ public class FinderServiceTest extends AbstractTest {
 		super.authenticate("handyWorker1");
 		final Finder finder = this.finderService.create();
 		Assert.notNull(finder);
+		super.authenticate(null);
+	}
+
+	@Test
+	public void testFindFixUpTask() {
+		super.authenticate("handyWorker1");
+		final Finder finder = this.finderService.create();
+		Assert.notNull(finder);
+		final Collection<FixUpTask> res = this.finderService.findFixUpTasks(finder);
+		Assert.notEmpty(res);
 		super.authenticate(null);
 	}
 

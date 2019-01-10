@@ -16,6 +16,7 @@
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 
+<<<<<<< HEAD
 <%-- <%
 	String connectionURL = "jdbc:mysql://localhost:3306/acme-handyworker";
 	Connection connection = null;
@@ -31,6 +32,10 @@
 	}
 %>
  --%>
+=======
+
+
+>>>>>>> dev_regina
 <div>
 	<a href="#"><img src="${banner}"  width="500" height="200"/></a>
 </div>

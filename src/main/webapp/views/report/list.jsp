@@ -18,21 +18,23 @@
 		<jstl:if test="${!report.draft }">
 			<security:authorize
 				access="hasRole('REFEREE'||'CUSTOMER'||'HANDYWORKER')">
-				<a href="report/referee/show.do?reportId=${report.id}">show</a>
+				<spring:url value="report/referee/show.do?reportId=${report.id}"
+					var="show">
+					<i class="far fa-eye"></i>
+				</spring:url>
 			</security:authorize>
 		</jstl:if>
-	</display:column>
-	<display:column>
 		<jstl:if test="${report.draft }">
 			<security:authorize access="hasRole('REFEREE')">
-				<a href="report/referee/edit.do?reportId=${report.id}">edit</a>
-			</security:authorize>
-		</jstl:if>
-	</display:column>
-	<display:column>
-		<jstl:if test="${report.draft }">
-			<security:authorize access="hasRole('REFEREE')">
-				<a href="report/referee/edit.do[POST.delete]">delete</a>
+				<spring:url value="report/referee/edit.do?reportId=${report.id}"
+					var="edit">
+					<i class="fas fa-pencil-alt"></i>
+				</spring:url>
+				<spring:url
+					value="report/referee/delete.do?reportId=${fixUpTask.id}"
+					var="delete">
+					<i class="fas fa-trash-alt"></i>
+				</spring:url>
 			</security:authorize>
 		</jstl:if>
 	</display:column>
@@ -43,6 +45,10 @@
 </display:table>
 <br />
 <security:authorize access="hasRole('REFEREE')">
-	<a href="report/referee/create.do">Create new report</a>
+<spring:url
+	value="report/referee/create.do"
+	var="add">
+	<i class="fas fa-plus"></i>
+</spring:url>
 </security:authorize>
 <br />

@@ -18,6 +18,7 @@
 	">
 
 	<util:list id="converters">
+<<<<<<< HEAD
 			<bean class="converters.StringToConfigurationConverter" /> 
 			<bean class="converters.ConfigurationToStringConverter" /> 
 			
@@ -69,6 +70,19 @@
 		<bean class="converters.StringToPhaseConverter" />
 		
 	
+=======
+		<!-- 
+			Add your own converters using entries of the following form: 
+			<bean class="converters.Class1ToClass2" /> 
+		-->
+		<bean class="converters.ReportToStringConverter" />
+		<bean class="converters.FinderToStringConverter" />
+		<bean class="converters.WarrantyToStringConverter" />
+		
+		<bean class="converters.StringToReportConverter" />
+		<bean class="converters.StringToFinderConverter" />
+		<bean class="converters.StringToWarrantyConverter" />
+>>>>>>> dev_regina
 	</util:list>
 	
 </beans>

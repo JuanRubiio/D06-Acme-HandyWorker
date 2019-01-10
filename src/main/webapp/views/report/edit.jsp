@@ -16,13 +16,17 @@
 	<form:hidden path="version" />
 	<form:hidden path="referee" />
 	<form:hidden path="complaint" />
-	<form:hidden path="collectionNotes" />
 	<form:hidden path="moment" />
 
 	<form:label path="description">
 		<spring:message code="report.description" />:
 	</form:label>
-	<form:input path="description" placeholder="${report.description} }"/>
+	<jstl:if test="${report.version==0 }">
+		<form:input path="description" />
+	</jstl:if>
+	<jstl:if test="${report.version!=0 }">
+		<form:input path="description" value="${report.description}" />
+	</jstl:if>
 	<form:errors cssClass="error" path="description" />
 	<br />
 	
@@ -35,6 +39,15 @@
 	
 	<form:checkbox path="draft" />Draft
 	<br />
+	
+	<form:label path="collectionNotes">
+		<spring:message code="report.collectionNotes" />:
+	</form:label>
+	<spring:url value="/note/customer,referee,handyWorker/list.do?reportId=*" var="list">
+		<i class="far fa-eye"></i>
+	</spring:url>
+	
+	
 
 	<input type="submit" name="save"
 		value="<spring:message code="report.save"/>" />
