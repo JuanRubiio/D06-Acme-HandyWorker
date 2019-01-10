@@ -16,21 +16,7 @@
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 
-<%
-	String connectionURL = "jdbc:mysql://localhost:3306/acme-handyworker";
-	Connection connection = null;
-	Class.forName("com.mysql.jdbc.Driver").newInstance();
-	connection = DriverManager.getConnection(connectionURL, "acme-manager", "ACME-M@n@ger-6874");
-	Statement st = connection.createStatement();
-	ResultSet rs = null;
-	String QueryString = "SELECT * FROM configuration ";
-	rs = st.executeQuery(QueryString);
-	while (rs.next()) {
-		;
-		String banner = (String) rs.getObject(3);
-		application.setAttribute("banner", banner);
-	}
-%>
+
 
 <div>
 	<a href="#"><img src="${banner}"  width="500" height="200"/></a>
