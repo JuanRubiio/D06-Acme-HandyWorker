@@ -9,7 +9,7 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 
-<display:table name="fixUpTask"
+<display:table name="fixUpTasks"
 	requestURI="fixUpTask/customer,handyWorker/list.do" class="displaytag">
 	<display:column>
 		<security:authorize access="hasRole('CUSTOMER')">

@@ -26,6 +26,18 @@ public class ReportRefereeController extends AbstractController {
 	private ReportService	reportService;
 
 
+	@RequestMapping(value = "/show", method = RequestMethod.GET)
+	public ModelAndView show(@RequestParam final int reportId) {
+		ModelAndView res;
+		Report report;
+
+		report = this.reportService.findOne(reportId);
+
+		res = this.createEditModelAndView(report);
+
+		return res;
+	}
+
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create(@RequestParam final Integer complaintId) {
 		ModelAndView res;

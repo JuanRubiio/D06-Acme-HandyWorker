@@ -14,9 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import controllers.AbstractController;
-
 import services.WarrantyService;
+import controllers.AbstractController;
 import domain.Warranty;
 
 @Controller
@@ -26,6 +25,18 @@ public class WarrantyAdministratorController extends AbstractController {
 	@Autowired
 	private WarrantyService	warrantyService;
 
+
+	@RequestMapping(value = "/show", method = RequestMethod.GET)
+	public ModelAndView show(@RequestParam final int warrantyId) {
+		ModelAndView res;
+		Warranty warranty;
+
+		warranty = this.warrantyService.findOne(warrantyId);
+
+		res = this.createEditModelAndView(warranty);
+
+		return res;
+	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
@@ -79,36 +90,35 @@ public class WarrantyAdministratorController extends AbstractController {
 		result = this.createEditModelAndView(warranty, null);
 		return result;
 	}
-	
-	@RequestMapping(value="/edit",method = RequestMethod.POST, params="delete")
-	public ModelAndView delete(Warranty warranty, BindingResult binding){
+
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
+	public ModelAndView delete(final Warranty warranty, final BindingResult binding) {
 		ModelAndView res;
-		
-		try{
-			warrantyService.delete(warranty);
+
+		try {
+			this.warrantyService.delete(warranty);
 			res = new ModelAndView("redict:list.do");
-		} catch(Throwable oops){
-			res = createEditModelAndView(warranty, "warranty.commit.error");
+		} catch (final Throwable oops) {
+			res = this.createEditModelAndView(warranty, "warranty.commit.error");
 		}
-		
+
 		return res;
 	}
-	
-	@RequestMapping(value="/edit",method = RequestMethod.POST, params="save")
-	public ModelAndView save(@Valid Warranty warranty, BindingResult binding){
+
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+	public ModelAndView save(@Valid final Warranty warranty, final BindingResult binding) {
 		ModelAndView res;
-		
-		if(binding.hasErrors()){
-			res = createEditModelAndView(warranty);
-		}else{
-			try{
-				warrantyService.save(warranty);
+
+		if (binding.hasErrors())
+			res = this.createEditModelAndView(warranty);
+		else
+			try {
+				this.warrantyService.save(warranty);
 				res = new ModelAndView("redict:list.do");
-			}catch(Throwable oops){
-				res = createEditModelAndView(warranty, "warranty.commit.error");
+			} catch (final Throwable oops) {
+				res = this.createEditModelAndView(warranty, "warranty.commit.error");
 			}
-		}
-		
+
 		return res;
 	}
 }

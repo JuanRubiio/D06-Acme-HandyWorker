@@ -13,9 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import controllers.AbstractController;
-
 import services.FinderService;
+import controllers.AbstractController;
 import domain.Finder;
 
 public class FinderHandyWorkerController extends AbstractController {
@@ -23,6 +22,18 @@ public class FinderHandyWorkerController extends AbstractController {
 	@Autowired
 	private FinderService	finderService;
 
+
+	@RequestMapping(value = "/show", method = RequestMethod.GET)
+	public ModelAndView show(@RequestParam final int finderId) {
+		ModelAndView res;
+		Finder finder;
+
+		finder = this.finderService.findOne(finderId);
+
+		res = this.createEditModelAndView(finder);
+
+		return res;
+	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
