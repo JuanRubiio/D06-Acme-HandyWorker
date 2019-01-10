@@ -1,4 +1,4 @@
-package controllers.handyworkerycustomer;
+package controllers.handyworkercustomer;
 
 import java.util.Collection;
 
@@ -23,7 +23,7 @@ import domain.Endorsement;
 
 @Controller
 @RequestMapping("/Endorsement/handyworker")
-public class EndorsementHandyWorkerCustomerController extends AbstractController{
+public class EndorsementCustomerController extends AbstractController{
 
 	@Autowired
 	private EndorsementService EndorsementService;

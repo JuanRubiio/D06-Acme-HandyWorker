@@ -23,23 +23,23 @@
 			<bean class="converters.Class1ToClass2" /> 
 		-->
 		
-		<bean class="converters.SponsorShipToString" /> 
-		<bean class="converters.StringToSponsorShip" /> 
+		<bean class="converters.SponsorshipToStringConverter" /> 
+		<bean class="converters.StringToSponsorshipConverter" /> 
 
-		<bean class="converters.SponsorToString" /> 
-		<bean class="converters.StringToSponsor" /> 		
+		<bean class="converters.SponsorToStringConverter" /> 
+		<bean class="converters.StringToSponsorConverter" /> 		
 		
-		<bean class="converters.TutorialToString" /> 
-		<bean class="converters.StringToTutorial" /> 
+		<bean class="converters.TutorialToStringConverter" /> 
+		<bean class="converters.StringToTutorialConverter" /> 
 		
-		<bean class="converters.SectionToString" /> 
-		<bean class="converters.StringToSection" /> 
+		<bean class="converters.SectionToStringConverter" /> 
+		<bean class="converters.StringToSectionConverter" /> 
 		
-		<bean class="converters.EndorserToString" /> 
-		<bean class="converters.StringToEndorser" /> 
+		<bean class="converters.EndorserToStringConverter" /> 
+		<bean class="converters.StringToEndorserConverter" /> 
 		
-		<bean class="converters.EndorsementToString" /> 
-		<bean class="converters.StringToEndorsement" /> 
+		<bean class="converters.EndorsementToStringConverter" /> 
+		<bean class="converters.StringToEndorsementConverter" /> 
 		
 	</util:list>
 	
