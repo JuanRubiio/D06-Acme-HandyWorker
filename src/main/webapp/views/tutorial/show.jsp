@@ -39,7 +39,7 @@
 	</form:label>
 	
 
-	<input type="submit" name="Cancel"
+	<input type="button" name="Cancel"
 		value="<spring:message code="tutorial.cancel" />"
 		onclick="javascript: relativeRedir('tutorial/handyworker/list.do');" />
 

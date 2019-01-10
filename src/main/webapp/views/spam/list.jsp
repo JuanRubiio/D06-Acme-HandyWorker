@@ -36,3 +36,8 @@
         </display:column>
 	</security:authorize>
 </display:table>
+
+<input type="button" name="create"
+		value="<spring:message code="spam.create" />"
+		onclick="javascript: relativeRedir('spam/administrator/create.do');" />
+	<br />

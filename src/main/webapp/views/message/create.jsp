@@ -19,7 +19,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<form:form action="message/authenticate/create.do" modelAttribute="mess">
+<form:form action="message/authenticate/create.do" modelAttribute="message">
 	<form:hidden path="id" />
 	<form:hidden path="version" />
 	<form:hidden path="sender" />
@@ -51,7 +51,7 @@
 
 	<acme:submit name="save" code="message.save" />
 
-	<acme:cancel url="messagebox/authenticate/list.do"
+	<acme:cancel url="messagebox/list.do"
 		code="message.cancel" />
 
 </form:form>

@@ -17,37 +17,37 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<h1> <jstl:out value="${folder.name}"/> </h1>
+<h1> <jstl:out value="${messagebox.name}"/> </h1>
 
 <display:table name="messages" id="row" pagesize="5" requestURI="${requestUri}" class="displaytag">
 	
 	<spring:message code="message.subject" var="subject" />
-	<display:column title="${subject}" property="subject" />
+	<display:column title="${row.subject}" property="subject" />
 	
 	<spring:message code="message.moment" var="moment" />
-	<display:column title="${moment}" >
+	<display:column title="${row.moment}" >
 		<fmt:formatDate value="${row.getMoment()}" pattern="dd/MM/yyyy HH:mm" />
 	</display:column>	
 	
 	<spring:message code="message.sender" var="sender" />
-	<display:column title="${sender}" property="sender.name" />
+	<display:column title="${row.sender}" property="sender.name" />
 	
 	<spring:message code="message.priority" var="priority" />
-	<display:column title="${priority}">
+	<display:column title="${row.priority}">
 		<spring:message code="message.${row.priority }"/>
 	</display:column>
 	
 	<spring:message code="message.display" var="display" />
-	<display:column title="${display}">
+	<display:column titleKey="message.display">
 			<input type="button" value="<spring:message code="message.display" />" 
-					onclick="javascript: window.location.assign('message/authenticate/display.do?messageId=${row.id}')" />
+					onclick="javascript: window.location.assign('message/display.do?messageId=${row.id}')" />
 	</display:column>
 	
 	<spring:message code="message.delete" var="delete" />
-	<display:column title="${delete}">
+	<display:column titleKey="message.delete">
 		<a href="message/authenticate/delete.do?messageId=${row.id}">
 		<jstl:choose>
-			<jstl:when test="${row.folder.name == \"Trashbox\"}">
+			<jstl:when test="${messagebox.name == \"trash box\"}">
 				<input type="button" value="<spring:message code="message.delete" />" 
 				onclick="return confirm('<spring:message code="message.confirm.delete.final" />')" />
 			</jstl:when>
@@ -63,4 +63,4 @@
 <br/>
 
 <input type="button" value="<spring:message code="message.back" />" 
-onclick="javascript: window.location.assign('messagebox/authenticate/list.do')" />
+onclick="javascript: window.location.assign('messagebox/list.do')" />

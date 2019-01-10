@@ -48,6 +48,6 @@
 	<input type="submit" name="delete" value="<spring:message code="message.delete"/>" onclick="return confirm('<spring:message code="message.confirm.delete" />')"/>
 	</jstl:if>
 	
-	<acme:cancel url="messagebox/authenticate/list.do" code="message.cancel" />
+	<acme:cancel url="messagebox/list.do" code="message.cancel" />
 	
 </form:form>

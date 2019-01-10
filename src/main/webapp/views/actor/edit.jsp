@@ -25,7 +25,7 @@
 		<form:hidden path="id" />
 		<form:hidden path="version" />
 		<form:hidden path="userAccount.authorities" />
-		<form:hidden path="messageboxes" />
+		<form:hidden path="messageBoxes" />
 
 
 		<form:label path="name">
@@ -42,11 +42,11 @@
 		<form:errors cssClass="error" path="surname" />
 		<br></br>
 
-		<form:label path="middlename">
-			<spring:message code="actor.middlename " />:  
+		<form:label path="middleName">
+			<spring:message code="actor.middlename" />:  
 	</form:label>
-		<form:input path="middlename" />
-		<form:errors cssClass="error" path="middlename" />
+		<form:input path="middleName" />
+		<form:errors cssClass="error" path="actor.middleName" />
 		<br></br>
 
 		<form:label path="email">

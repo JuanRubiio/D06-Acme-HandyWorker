@@ -12,7 +12,6 @@ import domain.MessageBox;
 @Repository
 public interface MessageBoxRepository extends JpaRepository<MessageBox, Integer> {
 
-	//Folders by user account
 	@Query("select f from MessageBox f where f.actor.userAccount.id=?1")
 	Collection<MessageBox> findMessageBoxsByUserAccount(int userAccountId);
 
@@ -24,5 +23,4 @@ public interface MessageBoxRepository extends JpaRepository<MessageBox, Integer>
 
 	@Query("select b from MessageBox b join b.messages mes where mes.id = ?1")
 	Collection<MessageBox> getMessageBoxesByMessageId(int id);
-
 }

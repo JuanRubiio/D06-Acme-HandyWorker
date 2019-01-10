@@ -18,7 +18,7 @@
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<form:form action="actor/edit.do" modelAttribute="actor">
+<form:form action="actor/register.do" modelAttribute="actor">
 
 	<fieldset>
 	
@@ -26,7 +26,6 @@
 	<form:hidden path="version" />
 	<form:hidden path="userAccount" />
 	<form:hidden path="messageboxes" />
-	<form:hidden path="suspicious" />
 	<form:hidden path="suspicious" />
 	
 

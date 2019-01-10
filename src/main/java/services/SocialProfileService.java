@@ -80,4 +80,7 @@ public class SocialProfileService {
 		this.socialProfileRepository.delete(socialProfile);
 	}
 
+	public SocialProfile getSocialProfileForActor(final Actor a1) {
+		return this.socialProfileRepository.getSocialProfileForActor(a1);
+	}
 }
