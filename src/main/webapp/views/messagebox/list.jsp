@@ -24,21 +24,21 @@
 	<spring:message code="messagebox.list" var="view" />
 	<display:column title="${view}">
 			<input type="button" value="<spring:message code="messagebox.view" />" 
-					onclick="javascript: window.location.assign('message/authenticate/list.do?messageBoxId=${row.id}')" />
+					onclick="javascript: window.location.assign('message/list.do?messageBoxId=${row.id}')" />
 	</display:column>
 	
 	<spring:message code="messagebox.edit" var="edit" />
 	<display:column title="${edit}">
 		<jstl:if test="${!row.system}">
 			<input type="button" value="<spring:message code="messagebox.edit" />" 
-					onclick="javascript: window.location.assign('messagebox/authenticate/edit.do?messageBoxId=${row.id}')" />
+					onclick="javascript: window.location.assign('messagebox/edit.do?messageBoxId=${row.id}')" />
 		</jstl:if>				
 	</display:column>	
 	
 </display:table>
 
 	<input type="button" name="create" value="<spring:message code="messagebox.create" />"
-	 onclick="javascript: window.location.assign('messagebox/authenticate/create.do')" />
+	 onclick="javascript: window.location.assign('messagebox/create.do')" />
 	 
 	<input type="button" name="createM" value="<spring:message code="messagebox.message.create" />"
-	 onclick="javascript: window.location.assign('message/authenticate/create.do')" />
+	 onclick="javascript: window.location.assign('message/create.do')" />

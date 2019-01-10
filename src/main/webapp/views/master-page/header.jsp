@@ -23,10 +23,9 @@
 	connection = DriverManager.getConnection(connectionURL, "acme-manager", "ACME-M@n@ger-6874");
 	Statement st = connection.createStatement();
 	ResultSet rs = null;
-	String QueryString = "SELECT * FROM configuration ";
+	String QueryString = "SELECT * FROM configuration;";
 	rs = st.executeQuery(QueryString);
 	while (rs.next()) {
-		;
 		String banner = (String) rs.getObject(3);
 		application.setAttribute("banner", banner);
 	}

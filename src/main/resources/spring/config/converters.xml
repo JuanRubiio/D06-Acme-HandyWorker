@@ -33,7 +33,11 @@
 			<bean class="converters.StringToSocialProfileConverter" /> 
 			<bean class="converters.SocialProfileToStringConverter" /> 
 			
+			<bean class="converters.StringToMessageBoxConverter" /> 
+			<bean class="converters.MessageBoxToStringConverter" /> 
 			
+			<bean class="converters.StringToMessageConverter" /> 
+			<bean class="converters.MessageToStringConverter" /> 
 	</util:list>
 	
 </beans>
