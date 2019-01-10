@@ -1,4 +1,4 @@
-package controllers.CustomerHandyWorker;
+package controllers.customerHandyWorker;
 
 import java.util.Collection;
 
@@ -16,7 +16,7 @@ import domain.Application;
 
 @Controller
 @RequestMapping("/application/handyWorker,customer")
-public class ApplicationController extends AbstractController{
+public class ApplicationController2 extends AbstractController{
 
 	@Autowired
 	private ApplicationService applicationService;

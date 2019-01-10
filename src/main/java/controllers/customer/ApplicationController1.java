@@ -1,4 +1,4 @@
-package controllers.Customer;
+package controllers.customer;
 
 import javax.validation.Valid;
 
@@ -18,7 +18,7 @@ import domain.Application;
 
 @Controller
 @RequestMapping("/application/customer")
-public class ApplicationController extends AbstractController{
+public class ApplicationController1 extends AbstractController{
 
 	@Autowired
 	private ApplicationService applicationService;
@@ -26,11 +26,11 @@ public class ApplicationController extends AbstractController{
 	@RequestMapping(value="/edit",method = RequestMethod.GET)
 	public ModelAndView edit(@RequestParam int applicationId){
 		ModelAndView res;
-		Application application;
+		Application applications;
 		
-		application = this.applicationService.findOne(applicationId);
-		Assert.notNull(application);
-		res = createEditModelAndView(application);
+		applications = this.applicationService.findOne(applicationId);
+		Assert.notNull(applications);
+		res = createEditModelAndView(applications);
 		
 		return res;
 	}

@@ -18,6 +18,9 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
+<display:table name="${phases}" id="phase" pagesize="5"
+	requestURI="${requestURI}" class="displaytag">
+
 <security:authorize access="hasRole('HANDYWORKER')">
 
 	<display:column property="id" title="phase.id"/>
@@ -25,17 +28,16 @@
 	<display:column property="startMoment" title="phase.startMoment"/>
 	<display:column property="endMoment" title="phase.endMoment"/>
 	<display:column>
-		<spring:url value="phase/show.do?phaseId={pha}">
-			<i class="far fa-eye"></i>
-			<spring:param name="pha" value="${phase.id}"/>
-		</spring:url>
-		<spring:url value="phase/edit.do?phaseId={pha}">
-			<i class="fas fa-pencil-alt"></i>
-			<spring:param name="pha" value="${phase.id}"/>
-		</spring:url>
+		<spring:url value="phase/show.do?phaseId=${phase.id}" var="eye"/>
+		<img src="main/webapp/images/eye.png"/>
+		
+		<spring:url value="phase/edit.do?phaseId=${phase.id}" var="pencil"/>
+		<img src="main/webapp/images/pencil.png"/>
+			
 		<spring:url value="phase/edit.do?[POST:delete]">
-			<i class="fas fa-trash-alt"></i>
+		<img src="main/webapp/images/trash.png"/>
 		</spring:url>
 	</display:column>
 
 </security:authorize>
+</display:table>

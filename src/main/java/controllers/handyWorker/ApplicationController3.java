@@ -1,4 +1,4 @@
-package controllers.HandyWorker;
+package controllers.handyWorker;
 
 import javax.validation.Valid;
 
@@ -18,7 +18,7 @@ import domain.FixUpTask;
 
 @Controller
 @RequestMapping("/application/handyWorker")
-public class ApplicationController extends AbstractController{
+public class ApplicationController3 extends AbstractController{
 
 	@Autowired
 	private ApplicationService applicationService;

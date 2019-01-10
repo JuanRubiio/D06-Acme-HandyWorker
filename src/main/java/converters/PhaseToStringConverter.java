@@ -9,7 +9,7 @@ import domain.Phase;
 
 @Component
 @Transactional	
-public class PhaseToStringConverterConverter implements Converter<Phase,String>{
+public class PhaseToStringConverter implements Converter<Phase,String>{
 
 	@Override
 	public String convert(Phase phase) {

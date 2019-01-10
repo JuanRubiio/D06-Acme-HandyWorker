@@ -1,4 +1,4 @@
-package controllers.Customer;
+package controllers.customer;
 
 import java.util.Collection;
 
@@ -28,12 +28,12 @@ public class FixUpTaskController extends AbstractController{
 	@RequestMapping(value="/list",method = RequestMethod.GET)
 	public ModelAndView list(){
 		ModelAndView res;
-		Collection<FixUpTask> fixUpTask;
+		Collection<FixUpTask> fixUpTasks;
 		
-		fixUpTask = fixUpTaskService.findAll();
+		fixUpTasks= fixUpTaskService.findAll();
 		
 		res = new ModelAndView("fixUpTask/list");
-		res.addObject("fixUpTask",fixUpTask);
+		res.addObject("fixUpTask",fixUpTasks);
 		res.addObject("requestURI","fixUpTask/customer/list.do");
 		
 		return res;
