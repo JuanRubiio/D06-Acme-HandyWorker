@@ -10,15 +10,21 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 <%@taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
 
-
-<display:table name="warranty"
-	requestURI="warranty/administrator/list.do" class="displaytag">
+<display:table name="${warranties}" id="warranty" pagesize="5"
+	requestURI="${requestURI}" class="displaytag">
 	<display:column>
 		<security:authorize access="hasRole('ADMIN')">
+		<spring:url value="warranty/administrator/show.do?warrantyId=${warranty.id}" var="eye" />
+    <img src="main/webapp/images/eye.png"/>
+    
+    
+    
+    
 			<spring:url
 				value="warranty/administrator/show.do?warrantyId=${warranty.id}"
-				var="show">
+				var="show"  >
 				<i class="far fa-eye"></i>
 			</spring:url>
 			<jstl:if test="${warranty.draft }">
