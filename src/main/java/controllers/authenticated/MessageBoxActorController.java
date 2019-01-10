@@ -39,7 +39,7 @@ public class MessageBoxActorController extends AbstractController {
 			messagebox = this.messageBoxService.findMessageBoxsByPrincipal();
 
 			result = new ModelAndView("messagebox/list");
-			result.addObject("messagebox", messagebox);
+			result.addObject("messageboxes", messagebox);
 			result.addObject("requestUri", "messagebox/list.do");
 		} catch (final Throwable oops) {
 			result = new ModelAndView("redirect:/#");

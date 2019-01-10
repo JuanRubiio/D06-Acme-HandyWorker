@@ -85,12 +85,12 @@ public class MessageActorController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ModelAndView list(@RequestParam final int messageboxId) {
+	public ModelAndView list(@RequestParam final int messageBoxId) {
 		ModelAndView result;
 		Collection<Message> messages;
 		MessageBox messagebox;
 		try {
-			messagebox = this.messageBoxService.findOne(messageboxId);
+			messagebox = this.messageBoxService.findOne(messageBoxId);
 
 			messages = messagebox.getMessages();
 

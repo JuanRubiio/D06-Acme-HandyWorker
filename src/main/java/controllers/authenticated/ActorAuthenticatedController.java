@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ActorService;
@@ -24,11 +23,11 @@ public class ActorAuthenticatedController extends AbstractController {
 
 
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public ModelAndView edit(@RequestParam final Integer actorId) {
+	public ModelAndView edit() {
 		ModelAndView res;
 		Actor actor;
 		try {
-			actor = this.actorService.findOne(actorId);
+			actor = this.actorService.getPrincipal();
 			res = new ModelAndView("actor/edit");
 			res.addObject("actor", actor);
 		} catch (final Throwable oops) {

@@ -16,7 +16,7 @@
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 
-<%
+<%-- <%
 	String connectionURL = "jdbc:mysql://localhost:3306/acme-handyworker";
 	Connection connection = null;
 	Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -30,7 +30,7 @@
 		application.setAttribute("banner", banner);
 	}
 %>
-
+ --%>
 <div>
 	<a href="#"><img src="${banner}"  width="500" height="200"/></a>
 </div>
@@ -114,8 +114,8 @@
 				<ul>
 					<li class="fNiv" class="arrow"></li>
 					<li><a href="actor/edit.do"><spring:message code="master.page.profile" /></a></li>
-					<li><a href="message/authenticate/create.do"><spring:message code="master.page.newmessage" /></a></li>
-					<li><a href="messagebox/authenticate/list.do"><spring:message code="master.page.messageboxes" /></a></li>
+					<li><a href="message/create.do"><spring:message code="master.page.newmessage" /></a></li>
+					<li><a href="messagebox/list.do"><spring:message code="master.page.messageboxes" /></a></li>
 					<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /> </a></li>
 				</ul>
 			</li>
