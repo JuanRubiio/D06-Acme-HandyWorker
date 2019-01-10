@@ -18,10 +18,25 @@
 	">
 
 	<util:list id="converters">
-		<!-- 
-			Add your own converters using entries of the following form: 
-			<bean class="converters.Class1ToClass2" /> 
-		-->
+	
+		<bean class="converters.CurriculumToStringConverter"/>
+		<bean class="converters.StringToCurriculum"/>
+		
+		<bean class="converters.EducationalRecordToStringConverter"/>
+		<bean class="converters.StringToEducationalRecordConverter"/>
+		
+		<bean class="converters.EndorserRecordToStringConverter"/>
+		<bean class="converters.StringToEndorserRecordConverter"/>
+		
+		<bean class="converters.PersonalRecordToStringConverter"/>
+		<bean class="converters.StringToPersonalRecordConverter"/>
+		
+		<bean class="converters.ProfessionalRecordToStringConverter"/>
+		<bean class="converters.StringToProfessionalRecordConverter"/>
+		
+		<bean class="converters.MiscellaneousRecordToStringConverter"/>
+		<bean class="converters.StringToMiscellaneousRecordConverter"/> 
+					
 	</util:list>
 	
 </beans>
