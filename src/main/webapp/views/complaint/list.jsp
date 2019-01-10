@@ -1,26 +1,52 @@
-<%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
 
-<%@taglib prefix="jstl"	uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
+<%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<security:authorize acces="hasRole('CUSTOMER')">
-<spring:message code ="listOfComplaintsCustomer" />
-<display:table name="complaints" id="complaints" requestURI="complaint/list.do" pagesize="5" class="displaytag" >
-	<display:column property="ticker" titleKey="Ticker" />
-	<display:column property="moment" titleKey="Moment" />
-	<display:column property="fixUpTask" titleKey="Fix-Up Task" />
-	<display:column  titleKey="View Details" />
+<!-- Listing grid -->
+
+<display:table pagesize="5" class="displaytag" keepStatus="true"
+	name="complaints" requestURI="${requestURI}" id="row">
+	
+	<!-- Attributes -->
+	
+	<spring:message code="complaint.ticker" var="tickerHeader" />
+	<display:column property="ticker" title="${tickerHeader}" sortable="false" />
+	
+	<security:authorize access="hasRole('REFEREE')">
+	
+	</security:authorize>
+	
+	<display:column>
+	<security:authorize access="hasRole('CUSTOMER')">
+		<a href="complaint/customer/show.do?complaintId=${row.id}">
+			<spring:message code="complaint.show"/>
+		</a>
+	</security:authorize>
+	<security:authorize access="hasRole('REFEREE')">
+		<a href="report/referee/create.do?complaintId=${row.id}">
+			<spring:message code="report.create"/>
+		</a>
+	</security:authorize>
+	
+	</display:column>
+	
+	
+	
 </display:table>
-</security:authorize>
-<security:authorize acces="hasRole('HANDYWORKER')">
-<spring:message code ="listOfComplaintsHandyworker" />
-<display:table name="complaints" id="complaints" requestURI="complaint/list.do" pagesize="5" class="displaytag" >
-	<display:column property="ticker" titleKey="Ticker" />
-	<display:column property="moment" titleKey="Moment" />
-	<display:column property="fixUpTask" titleKey="Fix-Up Task" />
-	<display:column  titleKey="View Details" />
-</display:table>
+
+<!-- Action links -->
+
+<security:authorize access="hasRole('CUSTOMER')">
+	<div>
+		<input type="button" name="create"
+		value="<spring:message code="complaint.create" />"
+		onclick="javascript: relativeRedir('complaint/customer/create.do');" />
+	</div>
 </security:authorize>

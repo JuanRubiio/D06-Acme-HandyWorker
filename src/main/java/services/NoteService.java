@@ -21,21 +21,21 @@ import domain.Note;
 public class NoteService {
 
 	@Autowired
-	private NoteRepository	noteRepository;
+	private static NoteRepository	noteRepository;
 
 	@Autowired
-	private ReportService	reportService;
+	private static ReportService	reportService;
 
 	@Autowired
-	private ActorService	actorService;
+	private static ActorService		actorService;
 
 
-	public Note create(final Integer reportId) {
+	public static Note create(final Integer reportId) {
 		Note res;
 		res = new Note();
 		res.setMoment(new Date());
-		res.setReport(this.reportService.findOne(reportId));
-		final Actor actor = this.actorService.getPrincipal();
+		res.setReport(NoteService.reportService.findOne(reportId));
+		final Actor actor = NoteService.actorService.getPrincipal();
 		final Collection<Authority> authorities = actor.getUserAccount().getAuthorities();
 		final ArrayList<String> listAuth = new ArrayList<String>();
 		if (!authorities.isEmpty())
@@ -47,14 +47,14 @@ public class NoteService {
 	public Note save(final Note note) {
 		Note res;
 		Assert.notNull(note);
-		res = this.noteRepository.save(note);
+		res = NoteService.noteRepository.save(note);
 		return res;
 	}
 
-	public Collection<Note> findAll() {
+	public static Collection<Note> findAll() {
 		Collection<Note> res;
 
-		res = this.noteRepository.findAll();
+		res = NoteService.noteRepository.findAll();
 
 		Assert.notNull(res);
 
@@ -66,7 +66,7 @@ public class NoteService {
 
 		Assert.notNull(noteId);
 
-		res = this.noteRepository.findOne(noteId);
+		res = NoteService.noteRepository.findOne(noteId);
 
 		Assert.notNull(res);
 		return res;

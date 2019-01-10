@@ -2,44 +2,48 @@
 	pageEncoding="ISO-8859-1"%>
 
 <%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="security"
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
-<%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
-<%@taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
+<!-- Listing grid -->
 
-<display:table name="warranty"
-	requestURI="warranty/administrator/list.do" class="displaytag">
+<display:table pagesize="5" class="displaytag" keepStatus="true"
+	name="warranty" requestURI="${requestURI}" id="row">
+
+	<!-- Attributes -->
+	<spring:message code="warranty.title" var="titleHeader" />
+	<display:column property="title" title="${titleHeader}" sortable="true" />
+
+	<spring:message code="warranty.finalMode" var="finalModeHeader" />
+	<display:column property="finalMode" title="${finalModeHeader}"
+		sortable="true" />
+
 	<display:column>
-		<security:authorize access="hasRole('ADMIN')">
-			<a href="warranty/administrator/show.do?warrantyId=${warranty.id}">show</a>
-		</security:authorize>
+		<a href="warranty/administrator/show.do?warrantyId=${row.id}">
+			<spring:message code="warranty.show" />
+		</a>
 	</display:column>
+
 	<display:column>
-		<jstl:if test="${warranty.draft }">
-			<security:authorize access="hasRole('ADMIN')">
-				<a href="warranty/administrator/edit.do?warrantyId=${warranty.id}">edit</a>
-			</security:authorize>
+		<jstl:if test="${row.finalMode == false}">
+			<a href="warranty/administrator/edit.do?warrantyId=${row.id}"> <spring:message
+					code="warranty.edit" />
+			</a>
 		</jstl:if>
 	</display:column>
-	<display:column>
-		<jstl:if test="${warranty.draft }">
-			<security:authorize access="hasRole('ADMIN')">
-				<a href="warranty/administrator/edit.do?[POST:delete]">delete</a>
-			</security:authorize>
-		</jstl:if>
-	</display:column>
-	<display:column property="title" titleKey="warranty.title" />
-	<display:column property="terms" titleKey="warranty.terms" />
-	<display:column property="laws" titleKey="warranty.laws" />
-	<display:column property="draft" titleKey="warranty.draft" />
 </display:table>
-<br />
-<security:authorize access="hasRole('ADMIN')">
-	<a href="warranty/administrator/create.do">Create new warranty</a>
-</security:authorize>
-<br />
+
+<!-- Action Links -->
+
+<input type="button" name="create"
+	value="<spring:message code="warranty.create" />"
+	onclick="javascript: window.location.replace('warranty/administrator/create.do');" />
+
+<%-- <input type="button" name="cancel"
+		value="<spring:message code="warranty.cancel" />"
+		onclick="javascript: window.location.replace('masterpage/administrator.do');" /> --%>

@@ -12,6 +12,7 @@ import org.springframework.util.Assert;
 
 import repositories.CustomerRepository;
 import security.Authority;
+import security.LoginService;
 import security.UserAccount;
 import domain.Actor;
 import domain.Application;
@@ -99,5 +100,14 @@ public class CustomerService {
 	public void delete(final Customer customer) {
 		Assert.notNull(customer);
 		this.customerRepository.delete(customer);
+	}
+
+	//Metodos complejos
+
+	public Customer findByPrincipal() {
+		Customer result;
+		result = this.customerRepository.findByUserAccountId(LoginService.getPrincipal().getId());
+		Assert.notNull(result);
+		return result;
 	}
 }
