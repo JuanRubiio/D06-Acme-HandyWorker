@@ -61,36 +61,21 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 <%@taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
 
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+<security:authorize access="hasRole('ADMIN')">  
 <display:table name="${warranties}" id="warranty" pagesize="5"
 	requestURI="${requestURI}" class="displaytag">
 	<display:column>
-		<security:authorize access="hasRole('ADMIN')">
-		<spring:url value="warranty/administrator/show.do?warrantyId=${warranty.id}" var="eye" />
-    <img src="main/webapp/images/eye.png"/>
+		
     
-    
-    
-    
-			<spring:url
-				value="warranty/administrator/show.do?warrantyId=${warranty.id}"
-				var="show"  >
-				<i class="far fa-eye"></i>
-			</spring:url>
+			<a href="warranty/administrator/show.do?warrantyId=${warranty.id}"/>	<i class="far fa-eye"></i>
+			
+			
 			<jstl:if test="${warranty.draft }">
-			<spring:url
-				value="warranty/administrator/edit.do?warrantyId=${warranty.id}"
-				var="edit">
-				<i class="fas fa-pencil-alt"></i>
-			</spring:url>
-			<spring:url
-				value="warranty/administrator/delete.do?warrantyId=${fixUpTask.id}"
-				var="delete">
-				<i class="fas fa-trash-alt"></i>
-			</spring:url>
+			<a href="warranty/administrator/edit.do?warrantyId=${warranty.id}"/>	<i class="fas fa-pencil-alt"></i>
+			<a href="warranty/administrator/delete.do?warrantyId=${warranty.id}"/>		<i class="fas fa-trash-alt"></i>
 			</jstl:if>
-		</security:authorize>
 	</display:column>
 	<display:column property="title" titleKey="warranty.title" />
 	<display:column property="terms" titleKey="warranty.terms" />
@@ -99,7 +84,7 @@
 </display:table>
 <br />
 
-<security:authorize access="hasRole('ADMIN')">
+
 <spring:url
 	value="fixUpTask/customer/create.do"
 	var="add">
