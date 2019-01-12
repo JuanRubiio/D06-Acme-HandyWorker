@@ -49,15 +49,55 @@ public class SponsorShipServiceTest extends AbstractTest {
 
 		super.authenticate("sponsor1");
 		Sponsorship sponsorship, saved;
-		final Collection<Sponsorship> sponsorships;
 		final Tutorial t = this.tutorialService.findOne(1415);
 		sponsorship = this.sponsorshipService.create(t);
 		final CreditCard creditCard = this.ccService.findOne(1372);
 		sponsorship.setCreditCard(creditCard);
+		sponsorship.setBanner("http://www.banner-prueba.com");
+		sponsorship.setLink("http://www.linkprueba.com");
 		saved = this.sponsorshipService.save(sponsorship);
-		sponsorships = this.sponsorshipService.findAll();
-		Assert.isTrue(sponsorships.contains(saved));
+		Assert.isTrue(saved.getBanner().equals("http://www.banner-prueba.com"));
+		super.authenticate(null);
+	}
+	
+	@Test
+	public void testFindAllSponsorship() {
+
+		final Collection<Sponsorship> todos = this.sponsorshipService.findAll();
+		Assert.isTrue(todos.size() == 2);
+	}
+	
+	@Test
+	public void testFindOneSponsorShip() {
+
+		final Sponsorship recuperado = this.sponsorshipService.findOne(1418);
+		Assert.isTrue(recuperado.getLink().equals("https://www.sponsorshipstutorials.com/id=289/"));
 
 	}
+	
+	@Test
+	public void testUpdateSponsorship() {
+		super.authenticate("sponsor1");
+		Sponsorship sp,saved;
+		sp = sponsorshipService.findOne(1418);
+		sp.setLink("http://www.meloinvento.com");
+		saved = this.sponsorshipService.save(sp);
+		Assert.isTrue(saved.getLink().equals("http://www.meloinvento.com"));
+		super.authenticate(null);
+	}
+
+	@Test
+	public void testDeleteSponsorship() {
+		super.authenticate("sponsor1");
+		Sponsorship sp;
+		Collection<Sponsorship> sponsorships;
+		sp = sponsorshipService.findOne(1418);
+		this.sponsorshipService.delete(sp);
+		sponsorships = sponsorshipService.findAll();
+		Assert.isTrue(!sponsorships.contains(sp));
+		super.authenticate(null);
+	}
+
+	
 
 }

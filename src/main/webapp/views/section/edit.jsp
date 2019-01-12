@@ -9,42 +9,39 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<form:form action="tutorial/handyworker/edit.do" modelAttribute="tutorial" method="post">
+<form:form action="section/handyworker/edit.do" modelAttribute="section" method="post">
 
 	<form:hidden path="id" />
 	<form:hidden path="version" />
-	<form:hidden path="momentCreate" />
-	<form:hidden path="momentUpdate" />
-	<form:hidden path="handyWorker" />
-	<form:hidden path="sections" />
+	<form:hidden path="orden" />
 
 	<form:label path="title">
-		<spring:message code="tutorial.title" />:
+		<spring:message code="section.title" />:
 	</form:label>
 	<form:input path="title"/>
 	<form:errors cssClass="error" path="title" />
 	<br />
 	
-	<form:label path="summary">
-		<spring:message code="tutorial.summary" />:
+	<form:label path="text">
+		<spring:message code="section.text" />:
 	</form:label>
-	<form:input path="summary"/>
-	<form:errors cssClass="error" path="summary" />
+	<form:input path="text"/>
+	<form:errors cssClass="error" path="text" />
 	<br />
 
 	<form:label path="pictures">
-		<spring:message code="tutorial.pictures" />:
+		<spring:message code="section.pictures" />:
 	</form:label>
 	<form:input path="pictures"/>
 	<form:errors cssClass="error" path="pictures" />
 	<br />
 
 	<input type="submit" name="Save"
-		value="<spring:message code="tutorial.save"/>" />
+		value="<spring:message code="section.save"/>" />
 
 	<input type="submit" name="Cancel"
-		value="<spring:message code="tutorial.cancel" />"
-		onclick="javascript: relativeRedir('tutorial/handyworker/list.do');" />
+		value="<spring:message code="section.cancel" />"
+		onclick="javascript: relativeRedir('section/handyworker/list.do');" />
 
 
 </form:form>
