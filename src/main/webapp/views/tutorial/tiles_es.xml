@@ -25,20 +25,10 @@
 		<put-attribute name="title" value="Editar tutorial" />
 		<put-attribute name="body" value="/views/tutorial/edit.jsp" />
 	</definition>
-
-	<definition name="tutorial/create" extends="master.page">
-		<put-attribute name="title" value="Crear tutorial" />
-		<put-attribute name="body" value="/views/tutorial/create.jsp" />
-	</definition>
 	
 		<definition name="tutorial/show" extends="master.page">
 		<put-attribute name="title" value="Mostrar tutorial" />
 		<put-attribute name="body" value="/views/tutorial/show.jsp" />
-	</definition>
-	
-	<definition name="tutorial/delete" extends="master.page">
-		<put-attribute name="title" value="Borrar tutorial" />
-		<put-attribute name="body" value="/views/tutorial/delete.jsp" />
 	</definition>
 	
 </tiles-definitions>

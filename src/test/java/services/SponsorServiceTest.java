@@ -13,6 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.util.Assert;
 
 import utilities.AbstractTest;
+import domain.MessageBox;
 import domain.Sponsor;
 
 // NOTA: ES NECESARIO POPULAR ANTES DE EJECUTAR EL TEST, PARA PREVENIR POSIBLES FALLOS
@@ -26,12 +27,14 @@ public class SponsorServiceTest extends AbstractTest {
 
 	@Autowired
 	private SponsorService	sponsorService;
+	@Autowired
+	private MessageBoxService messageboxService;
 
 
 	@Test
 	public void testCreateSponsor() {
 
-		Sponsor sponsor, saved, recuperado;
+		Sponsor sponsor, res, saved;
 		Collection<Sponsor> todos;
 		sponsor = this.sponsorService.create();
 		sponsor.setName("Alfonso");
@@ -39,11 +42,13 @@ public class SponsorServiceTest extends AbstractTest {
 		sponsor.setAddress("C/ Patriarca de la humanidad n12");
 		sponsor.setEmail("emailsponsor@gmail.com");
 		sponsor.setPhone("674590132");
-		saved = this.sponsorService.save(sponsor);
+		sponsor.setSuspicious(false);
+		res = this.sponsorService.save(sponsor);
+		Collection<MessageBox> cajas = this.messageboxService.addDefaultMessageBoxs(res);
+		res.setMessageBoxes(cajas);
+		saved = this.sponsorService.save(res);
 		todos = this.sponsorService.findAll();
-		recuperado = this.sponsorService.findOne(saved.getId());
-		Assert.isTrue(todos.contains(recuperado));
-		Assert.isTrue(recuperado.getName() == "Alfonso");
+		Assert.isTrue(todos.contains(saved));
 	}
 
 	@Test
@@ -62,11 +67,9 @@ public class SponsorServiceTest extends AbstractTest {
 	public void testDeleteSponsor() {
 
 		Sponsor s1;
-
 		s1 = this.sponsorService.findOne(1358);
 		this.sponsorService.delete(s1);
 		this.sponsorService.findOne(1358);
-
 	}
 
 	@Test

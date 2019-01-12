@@ -45,21 +45,21 @@ public class EndorserServiceTest extends AbstractTest {
 	public void testgetNumberPositiveWords() {
 
 		final Integer p = this.endorserService.getNumberOfPositiveWords(1308);
-		Assert.isTrue(p == 4);
+		Assert.isTrue(p == 2);
 	}
 
 	@Test
 	public void testgetNumberNegativeWords() {
 
 		final Integer n = this.endorserService.getNumberOfNegativeWords(1308);
-		Assert.isTrue(n == 2);
+		Assert.isTrue(n == 1);
 	}
 
 	@Test
 	public void testCalculateScore() {
 
 		final Double score = this.endorserService.calculateScore(1308);
-		Assert.isTrue(score == 2.0);
+		Assert.isTrue(score == 1.0);
 	}
 
 }

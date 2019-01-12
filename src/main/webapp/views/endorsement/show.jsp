@@ -9,32 +9,22 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<form:form action="endorsement/endorser/show.do" modelAttribute="endorsement" method="show">
-
-	<form:hidden path="id" />
-	<form:hidden path="version" />
-
-	<form:label path="comments">
-		<spring:message code="endorsement.comments" />: ${endorsement.comments}
-	</form:label>
-
-	<form:label path="moment">
-		<spring:message code="endorsement.moment" />: ${endorsement.moment}
-	</form:label>
+	<spring:message code="endorsement.moment"></spring:message> <jstl:out value="${endorsement.moment}"></jstl:out>
+	<br />
 	
-	<form:label path="write for">
-		<spring:message code="endorsement.writeFor" />: ${endorsement.writeFor}
-	</form:label>
+	<spring:message code="endorsement.comments"></spring:message> <jstl:out value="${endorsement.comments}"></jstl:out>
+	<br />
 	
-	<form:label path="write from">
-		<spring:message code="endorsement.writeFrom" />: ${endorsement.writeFrom}
-	</form:label>
+	<spring:message code="endorsement.writeFrom"></spring:message> <jstl:out value="${endorsement.writeFrom}"></jstl:out>
+	<br />
+	
+	<spring:message code="endorsement.writeFor"></spring:message> <jstl:out value="${endorsement.writeFor}"></jstl:out>
+	<br />
 	
 	
-
-	<input type="submit" name="Cancel"
-		value="<spring:message code="endorsement.cancel" />"
-		onclick="javascript: relativeRedir('endorsement/endorser/list.do');" />
-
-
-</form:form>
+	<security:authorize access="hasAnyRole('HANDYWORKER','CUSTOMER')">
+				<button type="button"
+					onclick="javascript: relativeRedir('endorsement/endorser/list.do')">
+					<spring:message code="endorsement.return" />
+				</button>
+			</security:authorize>

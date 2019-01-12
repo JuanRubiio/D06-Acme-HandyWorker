@@ -16,25 +16,26 @@
 	<form:hidden path="momentCreate" />
 	<form:hidden path="momentUpdate" />
 	<form:hidden path="handyWorker" />
+	<form:hidden path="sections" />
 
 	<form:label path="title">
 		<spring:message code="tutorial.title" />:
 	</form:label>
-	<form:input path="title" placeholder="${tutorial.title}"/>
+	<form:input path="title"/>
 	<form:errors cssClass="error" path="title" />
 	<br />
 	
 	<form:label path="summary">
 		<spring:message code="tutorial.summary" />:
 	</form:label>
-	<form:input path="summary" placeholder="${tutorial.summary}"/>
+	<form:input path="summary"/>
 	<form:errors cssClass="error" path="summary" />
 	<br />
 
 	<form:label path="pictures">
 		<spring:message code="tutorial.pictures" />:
 	</form:label>
-	<form:input path="pictures" placeholder="${tutorial.pictures}"/>
+	<form:input path="pictures"/>
 	<form:errors cssClass="error" path="pictures" />
 	<br />
 

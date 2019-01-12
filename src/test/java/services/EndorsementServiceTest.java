@@ -16,6 +16,7 @@ import utilities.AbstractTest;
 import domain.Customer;
 import domain.Endorsement;
 
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
 	"classpath:spring/datasource.xml", "classpath:spring/config/packages.xml"
@@ -25,8 +26,6 @@ public class EndorsementServiceTest extends AbstractTest {
 
 	@Autowired
 	private EndorsementService	endorsementService;
-	@Autowired
-	private EndorserService		endorserService;
 	@Autowired
 	private CustomerService		customerService;
 
@@ -44,7 +43,7 @@ public class EndorsementServiceTest extends AbstractTest {
 
 		final Collection<String> coleccionComentarios;
 		coleccionComentarios = this.endorsementService.findByWriteToComments(1308);
-		Assert.isTrue(coleccionComentarios.size() == 3);
+		Assert.isTrue(coleccionComentarios.size() == 2);
 	}
 
 	@Test
@@ -52,7 +51,7 @@ public class EndorsementServiceTest extends AbstractTest {
 
 		final Endorsement endorsement;
 		endorsement = this.endorsementService.findOne(1417);
-		Assert.isTrue(endorsement.getComments().equals("Poco eficiente"));
+		Assert.isTrue(endorsement.getComments().equals("Poco eficiente y malo y desastre"));
 	}
 
 	@Test
@@ -82,17 +81,22 @@ public class EndorsementServiceTest extends AbstractTest {
 		Assert.isTrue(recuperado.getComments().equals("la vida es bella"));
 		super.authenticate(null);
 	}
+	
+//	@Test
+//	public void testFindAllEndorsement() {
+//
+//		final Collection<Endorsement> todos = this.endorsementService.findAll();
+//		Assert.isTrue(todos.size() == 3);
+//	}
 
-	@Test
+	@Test (expected = IllegalArgumentException.class)
 	public void testDeleteEndorsement() {
 
 		super.authenticate("handyWorker1");
 		final Endorsement endorsement;
-		Collection<Endorsement> todos;
 		endorsement = this.endorsementService.findOne(1417);
 		this.endorsementService.delete(endorsement);
-		todos = this.endorsementService.findAll();
-		Assert.isTrue(!todos.contains(endorsement));
+		this.endorsementService.findOne(1417);
 		super.authenticate(null);
 	}
 
