@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import security.UserAccount;
 import security.UserAccountService;
 import services.CustomerService;
 import domain.Customer;
@@ -38,19 +37,19 @@ public class CustomerController extends AbstractController {
 
 	}
 
-	@RequestMapping(value = "/create", method = RequestMethod.GET)
-	public ModelAndView create() {
-		ModelAndView result;
-
-		final Customer c = this.customerService.create();
-		final UserAccount ua = this.userAccountService.createForCustomer();
-		c.setUserAccount(ua);
-
-		result = this.createEditModelAndView(c);
-
-		return result;
-
-	}
+	//	@RequestMapping(value = "/create", method = RequestMethod.GET)
+	//	public ModelAndView create() {
+	//		ModelAndView result;
+	//
+	//		//	final Customer c = this.customerService.create();
+	//		final UserAccount ua = this.userAccountService.createForCustomer();
+	//		c.setUserAccount(ua);
+	//
+	//		result = this.createEditModelAndView(c);
+	//
+	//		return result;
+	//
+	//	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit() {

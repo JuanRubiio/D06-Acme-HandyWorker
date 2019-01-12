@@ -1,5 +1,5 @@
 
-package controllers.handyWorker;
+package controllers.handyworker;
 
 import java.util.Collection;
 

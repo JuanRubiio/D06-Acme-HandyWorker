@@ -1,4 +1,5 @@
-package controllers.handyWorker;
+
+package controllers.handyworker;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,46 +10,45 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.HandyWorkerService;
-
 import controllers.AbstractController;
 import domain.HandyWorker;
 
 @Controller
 @RequestMapping("/actor/handyWorker")
-public class HandyWorkerController extends AbstractController{
+public class HandyWorkerController extends AbstractController {
 
 	@Autowired
-	private HandyWorkerService handyWorkerService;
-	
-	
-	@RequestMapping(value="/edit",method = RequestMethod.GET)
-	public ModelAndView edit(@RequestParam int handyWorkerId){
+	private HandyWorkerService	handyWorkerService;
+
+
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	public ModelAndView edit(@RequestParam final int handyWorkerId) {
 		ModelAndView res;
-		
+
 		HandyWorker handyWorkers;
-		
+
 		handyWorkers = this.handyWorkerService.findOne(handyWorkerId);
 		Assert.notNull(handyWorkers);
-		res = createEditModelAndView(handyWorkers);
+		res = this.createEditModelAndView(handyWorkers);
 		return res;
 	}
-	
-	protected ModelAndView createEditModelAndView(HandyWorker handyWorker){
+
+	protected ModelAndView createEditModelAndView(final HandyWorker handyWorker) {
 		ModelAndView res;
-		
-		res = createEditModelAndView(handyWorker,null);
-		
+
+		res = this.createEditModelAndView(handyWorker, null);
+
 		return res;
 	}
-	
-	protected ModelAndView createEditModelAndView(HandyWorker handyWorker, String messageCode){
+
+	protected ModelAndView createEditModelAndView(final HandyWorker handyWorker, final String messageCode) {
 		ModelAndView res;
-		
+
 		res = new ModelAndView("handyWorker/edit");
-		res.addObject("handyWorker",handyWorker);
-		res.addObject("message",messageCode);		
-		
+		res.addObject("handyWorker", handyWorker);
+		res.addObject("message", messageCode);
+
 		return res;
 	}
-	
+
 }

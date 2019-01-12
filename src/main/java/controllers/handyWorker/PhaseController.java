@@ -1,4 +1,5 @@
-package controllers.handyWorker;
+
+package controllers.handyworker;
 
 import java.util.Collection;
 
@@ -16,7 +17,6 @@ import org.springframework.web.servlet.ModelAndView;
 import services.ApplicationService;
 import services.FixUpTaskService;
 import services.PhaseService;
-
 import controllers.AbstractController;
 import domain.Application;
 import domain.FixUpTask;
@@ -24,107 +24,107 @@ import domain.Phase;
 
 @Controller
 @RequestMapping("/phase/handyWorker")
-public class PhaseController extends AbstractController{
+public class PhaseController extends AbstractController {
 
 	@Autowired
-	private PhaseService phaseService;
-	
+	private PhaseService		phaseService;
+
 	@Autowired
-	private ApplicationService applicationService;
-	
+	private ApplicationService	applicationService;
+
 	@Autowired
-	private FixUpTaskService fixUpTaskService;
-	
-	@RequestMapping(value="/list",method = RequestMethod.GET)
-	public ModelAndView list(){
+	private FixUpTaskService	fixUpTaskService;
+
+
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public ModelAndView list() {
 		ModelAndView res;
 		Collection<Phase> phases;
-		
-		phases = phaseService.findAll();
-		
+
+		phases = this.phaseService.findAll();
+
 		res = new ModelAndView("phase/list");
-		res.addObject("phases",phases);
+		res.addObject("phases", phases);
 		res.addObject("requestURI", "phase/handyWorker/list.do");
-		
+
 		return res;
-	} 
-	
-	@RequestMapping(value="/create",method = RequestMethod.GET)
-	public ModelAndView create(){
+	}
+
+	@RequestMapping(value = "/create", method = RequestMethod.GET)
+	public ModelAndView create() {
 		ModelAndView res;
 		Phase phases;
 		Application application;
 		FixUpTask fixUpTask;
-		
+
 		fixUpTask = this.fixUpTaskService.create();
 		application = this.applicationService.create(fixUpTask);
 		phases = this.phaseService.create(application);
-		
+
 		res = this.createEditModelAndView(phases);
-		
-		return res;
-	}
-	
-	@RequestMapping(value="/edit",method = RequestMethod.GET)
-	public ModelAndView edit(@RequestParam int phaseId){
-		ModelAndView res;
-		Phase phases;
-		
-		phases = this.phaseService.findOne(phaseId);
-		Assert.notNull(phases);
-		res = createEditModelAndView(phases);
-		
-		return res;
-	}
-	
-	@RequestMapping(value="/edit",method = RequestMethod.POST, params="save")
-	public ModelAndView save(@Valid Phase phase, BindingResult binding){
-		ModelAndView res;
-		
-		if(binding.hasErrors()){
-			res = createEditModelAndView(phase);
-		}else{
-			try{
-				phaseService.save(phase);
-				res = new ModelAndView("redict:list.do");
-			}catch(Throwable oops){
-				res = createEditModelAndView(phase, "phase.commit.error");
-			}
-		}
-		
+
 		return res;
 	}
 
-	@RequestMapping(value="/edit",method = RequestMethod.POST, params="delete")
-	public ModelAndView delete(Phase phase, BindingResult binding){
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	public ModelAndView edit(@RequestParam final int phaseId) {
 		ModelAndView res;
-		
-		try{
-			phaseService.delete(phase);
+		Phase phases;
+
+		phases = this.phaseService.findOne(phaseId);
+		Assert.notNull(phases);
+		res = this.createEditModelAndView(phases);
+
+		return res;
+	}
+
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+	public ModelAndView save(@Valid final Phase phase, final BindingResult binding) {
+		ModelAndView res;
+
+		if (binding.hasErrors())
+			res = this.createEditModelAndView(phase);
+		else
+			try {
+				this.phaseService.save(phase);
+				res = new ModelAndView("redict:list.do");
+			} catch (final Throwable oops) {
+				res = this.createEditModelAndView(phase, "phase.commit.error");
+			}
+
+		return res;
+	}
+
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
+	public ModelAndView delete(final Phase phase, final BindingResult binding) {
+		ModelAndView res;
+
+		try {
+			this.phaseService.delete(phase);
 			res = new ModelAndView("redict:list.do");
-		} catch(Throwable oops){
-			res = createEditModelAndView(phase, "phase.commit.error");
+		} catch (final Throwable oops) {
+			res = this.createEditModelAndView(phase, "phase.commit.error");
 		}
-		
+
 		return res;
 	}
-	
-	protected ModelAndView createEditModelAndView(Phase phase){
+
+	protected ModelAndView createEditModelAndView(final Phase phase) {
 		ModelAndView res;
-		
-		res = createEditModelAndView(phase,null);
-		
+
+		res = this.createEditModelAndView(phase, null);
+
 		return res;
 	}
-	
-	protected ModelAndView createEditModelAndView(Phase phase, String messageCode){
+
+	protected ModelAndView createEditModelAndView(final Phase phase, final String messageCode) {
 		ModelAndView res;
-		
+
 		res = new ModelAndView("phase/edit");
-		res.addObject("phase",phase);
-		res.addObject("message",messageCode);		
-		
+		res.addObject("phase", phase);
+		res.addObject("message", messageCode);
+
 		return res;
 	}
-	
+
 }
