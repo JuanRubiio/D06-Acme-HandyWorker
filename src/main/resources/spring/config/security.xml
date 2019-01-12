@@ -48,12 +48,6 @@
 		<security:intercept-url pattern="/category/administrator/**" access="hasRole('ADMIN')" /> 
 		
     	<security:intercept-url pattern="/warranty/administrator/**" access="hasRole('ADMIN')" /> 
-		<security:intercept-url pattern="/customer/action-1.do" access="hasRole('CUSTOMER')" /> 
-	
-
-		<security:intercept-url pattern="/customer/action-1.do" access="hasRole('CUSTOMER')" /> 
-		<security:intercept-url pattern="/customer/action-2.do" access="hasRole('CUSTOMER')" /> 
-
 
 		<security:intercept-url pattern="/socialProfile/actor/**" access="isAuthenticated()" /> 
 		<security:intercept-url pattern="/message/**" access="isAuthenticated()" /> 
@@ -66,7 +60,7 @@
 		<security:intercept-url pattern="/sponsorship/sponsor/**" access="hasRole('SPONSOR')" />
 		<security:intercept-url pattern="/tutorial/handyworker/**" access="hasRole('HANDYWORKER')" />
 		<security:intercept-url pattern="/section/handyworker/**" access="hasRole('HANDYWORKER')" />
-		<security:intercept-url pattern="/endorser/admin" access="hasRole('ADMIN')" />
+		<security:intercept-url pattern="/endorser/admin/**" access="hasRole('ADMIN')" />
 		<security:intercept-url pattern="/endorsement/**" access="hasAnyRole('HANDYWORKER','CUSTOMER')" />
 
 		<security:intercept-url pattern="/actor/register.do" access="isAnonymous()" />
