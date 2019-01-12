@@ -16,7 +16,7 @@
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 
-<%
+<%-- <%
 	String connectionURL = "jdbc:mysql://localhost:3306/acme-handyworker";
 	Connection connection = null;
 	Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -29,7 +29,7 @@
 		String banner = (String) rs.getObject(3);
 		application.setAttribute("banner", banner);
 	}
-%>
+%> --%>
  <div>
 	<a href="#"><img src="${banner}"  width="500" height="200"/></a>
 </div>
