@@ -39,7 +39,7 @@
 	<input type="submit" name="Save"
 		value="<spring:message code="section.save"/>" />
 
-	<input type="submit" name="Cancel"
+	<input type="button" name="Cancel"
 		value="<spring:message code="section.cancel" />"
 		onclick="javascript: relativeRedir('section/handyworker/list.do');" />
 

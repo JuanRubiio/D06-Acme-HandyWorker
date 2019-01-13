@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import repositories.TutorialRepository;
-import domain.HandyWorker;
 import domain.Tutorial;
 
 @Service
@@ -21,16 +20,12 @@ public class TutorialService {
 	//Managed repo
 	@Autowired
 	private TutorialRepository	tutorialRepository;
-	@Autowired
-	private ActorService		actorService;
+
 
 
 	//Supporting services
-	public Tutorial create(final HandyWorker handyWorker) {
+	public Tutorial create() {
 		final Tutorial res = new Tutorial();
-		Assert.isTrue(this.actorService.getPrincipal().getUserAccount().getAuthorities().contains("HANDYWORKER"));
-		Assert.notNull(handyWorker);
-		res.setHandyWorker(handyWorker);
 		res.setMomentCreate(new Date());
 		return res;
 	}

@@ -17,18 +17,17 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
 <display:table name="tutorials" id="row" pagesize="5" requestURI="${requestUri}" class="displaytag">
 	
 	<spring:message code="tutorial.title" var="title" />
 	<display:column property="title" title="${title}" />
 	
-	<spring:message code="tutorial.momentUpdate" var="momentupdate" />
-	<display:column title="${momentUpdate}" >
-	<fmt:formatDate value="${row.getMomentUpdate()}" pattern="dd/MM/yyyy HH:mm" />
-	</display:column>	
+	<spring:message code="tutorial.momentUpdate" var="momentUpdate" />
+	<display:column property="momentUpdate" title="${momentUpdate}" /> 
 	
 	<spring:message code="tutorial.summary" var="summary" />
-	<display:column title="${row.summary}" property="summary" />
+	<display:column property="summary" title="${summary}"  />
 	
 	<spring:message code="tutorial.pictures" var="pictures" />
 	<display:column property="pictures" title="${pictures}" />
@@ -42,17 +41,15 @@
 	
 	<security:authorize access="hasRole('HANDYWORKER')">
 		<display:column titleKey="tutorial.show">
-			<input type="submit" name="show"
-				value="<spring:message code="tutorial.show" />"
-				onclick="javascript: relativeRedir('tutorial/handyworker/show.do?tutorialId=${row.id}');" />
+			<input type="submit" name="show" value="<spring:message code="tutorial.show" />"
+			onclick="javascript: relativeRedir('tutorial/handyworker/show.do?tutorialId=${row.id}');" />
 		</display:column>
 	</security:authorize>
 	
 	<security:authorize access="hasRole('HANDYWORKER')">
-		<display:column>
-		<input type="submit" name="edit"
-				value="<spring:message code="tutorial.edit" />"
-				onclick="javascript: relativeRedir('tutorial/handyworker/edit.do?tutorialId=${row.id}');" />
+		<display:column titleKey="tutorial.edit">
+		<input type="submit" name="edit" value="<spring:message code="tutorial.edit" />"
+		onclick="javascript: relativeRedir('tutorial/handyworker/edit.do?tutorialId=${row.id}');" />
 		</display:column>
 	</security:authorize>
 	

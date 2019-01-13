@@ -39,10 +39,10 @@
 	<form:errors cssClass="error" path="pictures" />
 	<br />
 
-	<input type="submit" name="Save"
+	<input type="submit" name="save"
 		value="<spring:message code="tutorial.save"/>" />
 
-	<input type="submit" name="Cancel"
+	<input type="button" name="cancel"
 		value="<spring:message code="tutorial.cancel" />"
 		onclick="javascript: relativeRedir('tutorial/handyworker/list.do');" />
 

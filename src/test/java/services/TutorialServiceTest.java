@@ -29,13 +29,14 @@ public class TutorialServiceTest extends AbstractTest {
 	@Test
 	public void createTest() {
 		super.authenticate("handyWorker1");
-		Tutorial tutorial = new Tutorial();
+		Tutorial tutorial;
 		HandyWorker handyWorker = new HandyWorker();
 		handyWorker = (HandyWorker) this.actorService.getPrincipal();
 		handyWorker.setMark("Pepito chapuza");
-
-		tutorial = this.tutorialService.create(handyWorker);
+		tutorial = this.tutorialService.create();
+		tutorial.setHandyWorker(handyWorker);
 		Assert.notNull(tutorial);
+		super.authenticate(null);
 	}
 
 }
