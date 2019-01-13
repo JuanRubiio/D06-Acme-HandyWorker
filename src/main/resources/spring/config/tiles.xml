@@ -37,8 +37,9 @@
 		<value>/views/fixUpTask/tiles.xml</value>
 		<value>/views/message/tiles.xml</value>
 		<value>/views/messagebox/tiles.xml</value>
-		<value>/views/note/tiles.xml</value>
-		<value>/views/phase/tiles.xml</value>
+<!-- 		<value>/views/note/tiles.xml</value>
+ -->		
+ 		<value>/views/phase/tiles.xml</value>
 		<value>/views/report/tiles.xml</value>
 		<value>/views/spam/tiles.xml</value>
 		<value>/views/warranty/tiles.xml</value>

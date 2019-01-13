@@ -65,6 +65,8 @@ public class MessageBoxService {
 		MessageBox result;
 
 		Assert.notNull(messageBox);
+		messageBox.setActor(this.actorService.getPrincipal());
+
 		result = this.messageboxRepository.save(messageBox);
 
 		Assert.notNull(result);
