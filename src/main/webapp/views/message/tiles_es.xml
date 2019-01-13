@@ -25,6 +25,10 @@
 		<put-attribute name="title" value="Mostrar mensaje" />
 		<put-attribute name="body" value="/views/message/display.jsp" />
 	</definition>
+	<definition name="message/broadcast" extends="master.page">	
+		<put-attribute name="title" value="Broadcast" />
+		<put-attribute name="body" value="/views/message/broadcast.jsp" />
+	</definition>
 	
 	<definition name="message/create" extends="master.page">	
 		<put-attribute name="title" value="Enviar un mensaje" />

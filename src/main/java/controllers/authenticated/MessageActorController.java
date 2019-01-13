@@ -133,12 +133,10 @@ public class MessageActorController extends AbstractController {
 	}
 
 	// Creating
-	@RequestMapping(value = "/broadcast", method = RequestMethod.GET)
+	@RequestMapping(value = "/administrator/broadcast", method = RequestMethod.GET)
 	public ModelAndView createBroadcast() {
 		ModelAndView result;
 		Message mess;
-		final Collection<Actor> actors;
-		final Actor actor;
 
 		mess = this.messageService.create();
 

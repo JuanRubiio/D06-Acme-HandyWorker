@@ -39,12 +39,12 @@
 
 	<display:column titleKey="category.father">
 		<jstl:choose>
-			<jstl:when test="${row.father.name == 'CATEGORY'}">
+			<jstl:when test="${row.father.engName == 'CATEGORY'}">
 				<a href="category/list.do">${row.father.engName}</a>
 			</jstl:when>
 			<jstl:otherwise>
 				<a
-					href="category/listchildren.do?categoryId=${row.father.father.id}">${row.father.name}</a>
+					href="category/listchildren.do?categoryId=${row.father.father.id}">${row.father.espName}</a>
 			</jstl:otherwise>
 		</jstl:choose>
 	</display:column>
@@ -70,7 +70,6 @@
 	</security:authorize>
 
 </display:table>
-
 
 <security:authorize access="hasRole('ADMIN')">
 	<input type="button" name="create"

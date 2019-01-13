@@ -30,6 +30,11 @@
 		<put-attribute name="title" value="Send a message" />
 		<put-attribute name="body" value="/views/message/create.jsp" />
 	</definition>
+		<definition name="message/broadcast" extends="master.page">	
+		<put-attribute name="title" value="Broadcast" />
+		<put-attribute name="body" value="/views/message/broadcast.jsp" />
+	</definition>
+	
 	
 	<definition name="message/move" extends="master.page">	
 		<put-attribute name="title" value="Move a message" />
