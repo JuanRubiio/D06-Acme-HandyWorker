@@ -83,11 +83,13 @@
 
 		<bean class="converters.ReportToStringConverter" />
 		<bean class="converters.FinderToStringConverter" />
-		<bean class="converters.WarrantyToStringConverter" />
 
+		<bean class="converters.WarrantyToStringConverter" />
+		<bean class="converters.StringToWarrantyConverter" />
+		
 		<bean class="converters.StringToReportConverter" />
 		<bean class="converters.StringToFinderConverter" />
-		<bean class="converters.StringToWarrantyConverter" />
+
 	</util:list>
 
 </beans>

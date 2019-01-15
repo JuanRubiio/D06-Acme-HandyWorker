@@ -28,14 +28,13 @@ public class WarrantyAdministratorController extends AbstractController {
 
 	@RequestMapping(value = "/show", method = RequestMethod.GET)
 	public ModelAndView show(@RequestParam final int warrantyId) {
-		ModelAndView res;
+		ModelAndView result;
 		Warranty warranty;
-
 		warranty = this.warrantyService.findOne(warrantyId);
+		result = new ModelAndView("warranty/show");
+		result.addObject("warranty", warranty);
 
-		res = this.createEditModelAndView(warranty);
-
-		return res;
+		return result;
 	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
