@@ -45,11 +45,10 @@
 			<legend>
 				<b><spring:message code="tutorial.sections"></spring:message></b>
 			</legend>
-			<display:table name="sections" id="section"
-				pagesize="5" class="displaytag">
+			<display:table name="sections" id="section" pagesize="5" class="displaytag">
 
 				<spring:message code="tutorial.section.title" var="title"></spring:message>
-				<display:column property="title" title="${title}:"
+				<display:column property="title" title="${title}"
 					sortable="true" />
 					
 				<spring:message code="tutorial.section.orden" var="orden"></spring:message>

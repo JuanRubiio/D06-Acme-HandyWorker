@@ -31,13 +31,7 @@
 	
 	<spring:message code="tutorial.pictures" var="pictures" />
 	<display:column property="pictures" title="${pictures}" />
-	
-	<spring:message code="tutorial.sections" var="tutsec" />
-	<display:column title="${tutsec}">
-		<jstl:forEach items="${tutorial.sections}" var="tutorialSections">
-			<a href="tutorial/handyworker/list.do?sectionId= ${tutorialSections.id}"> <jstl:out value="tutorial.section"></jstl:out></a>
-		</jstl:forEach>
-	</display:column>
+		
 	
 	<security:authorize access="hasRole('HANDYWORKER')">
 		<display:column titleKey="tutorial.show">
@@ -49,14 +43,13 @@
 	<security:authorize access="hasRole('HANDYWORKER')">
 		<display:column titleKey="tutorial.edit">
 		<input type="submit" name="edit" value="<spring:message code="tutorial.edit" />"
-		onclick="javascript: relativeRedir('tutorial/handyworker/edit.do?tutorialId=${row.id}');" />
+		onclick="javascript: relativeRedir('tutorial/handyworker/edit.do?tutorialId=${row.id}');" /> 
 		</display:column>
 	</security:authorize>
 	
 	<security:authorize access="hasRole('HANDYWORKER')">
 		<display:column titleKey="tutorial.delete">
-			<input type="submit" name="delete"
-				value="<spring:message code="tutorial.delete" />"
+			<input type="submit" name="delete" value="<spring:message code="tutorial.delete" />"
 				onclick="javascript: relativeRedir('tutorial/handyworker/delete.do?tutorialId=${row.id}');" />
 		</display:column>
 	</security:authorize>

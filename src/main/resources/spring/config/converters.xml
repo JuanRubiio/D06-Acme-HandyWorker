@@ -39,7 +39,10 @@
 		<bean class="converters.StringToEndorserConverter" /> 
 		
 		<bean class="converters.EndorsementToStringConverter" /> 
-		<bean class="converters.StringToEndorsementConverter" /> 
+		<bean class="converters.StringToEndorsementConverter" />
+		
+		<bean class="converters.HandyWorkerToStringConverter" /> 
+		<bean class="converters.StringToHandyWorkerConverter" />  
 		
 	</util:list>
 	

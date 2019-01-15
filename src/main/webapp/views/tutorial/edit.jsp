@@ -9,7 +9,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<form:form action="tutorial/handyworker/edit.do" modelAttribute="tutorial" method="post">
+<form:form action="tutorial/handyworker/save.do" modelAttribute="tutorial" method="post">
 
 	<form:hidden path="id" />
 	<form:hidden path="version" />
@@ -37,6 +37,8 @@
 	</form:label>
 	<form:input path="pictures"/>
 	<form:errors cssClass="error" path="pictures" />
+	<br />
+
 	<br />
 
 	<input type="submit" name="save"

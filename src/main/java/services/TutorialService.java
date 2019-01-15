@@ -10,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
+import repositories.SponsorshipRepository;
 import repositories.TutorialRepository;
+import domain.Sponsorship;
 import domain.Tutorial;
 
 @Service
@@ -18,9 +20,11 @@ import domain.Tutorial;
 public class TutorialService {
 
 	//Managed repo
+	
 	@Autowired
 	private TutorialRepository	tutorialRepository;
-
+	@Autowired
+	private SponsorshipRepository sponsorshipRepository;
 
 
 	//Supporting services
@@ -47,6 +51,14 @@ public class TutorialService {
 
 		return res;
 	}
+	
+	public Collection<Tutorial> findByHandyWorker(Integer id) {
+		final Collection<Tutorial> res;
+		res = this.tutorialRepository.getTutorialsPerHandyWorker(id);
+		Assert.notNull(res);
+
+		return res;
+	}
 
 	public Tutorial save(final Tutorial tutorial) {
 		final Tutorial res;
@@ -59,9 +71,12 @@ public class TutorialService {
 	}
 
 	public void delete(final Tutorial tutorial) {
-		Assert.notNull(tutorial);
+	Assert.notNull(tutorial);
+	Collection<Sponsorship> sponsorships = this.sponsorshipRepository.findByTutorialId(tutorial.getId());
+	for (Sponsorship sp : sponsorships){
+		this.sponsorshipRepository.delete(sp);
+	}
 		this.tutorialRepository.delete(tutorial);
-
 	}
 
 }
