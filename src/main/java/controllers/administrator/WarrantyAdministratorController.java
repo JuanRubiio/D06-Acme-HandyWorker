@@ -71,11 +71,26 @@ public class WarrantyAdministratorController extends AbstractController {
 		result = this.createEditModelAndView(warranty);
 		return result;
 	}
-
+	//	@RequestMapping(value="/delete",method = RequestMethod.GET)
+	//	public ModelAndView delete(@RequestParam final int tutorialId){
+	//		
+	//		ModelAndView res;
+	//		Tutorial tutorial;
+	//		tutorial = this.TutorialService.findOne(tutorialId);
+	//		Assert.notNull(tutorial);
+	//		TutorialService.delete(tutorial);
+	//		//REDIRIGE AL CONTROLLER DE LIST Y CARGA LA VISTA LIST.JSP
+	//		res = new ModelAndView("redirect:list.do");
+	//		return res;
+	//	}
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
 	public ModelAndView delete(@RequestParam final int warrantyId) {
-		final ModelAndView res = new ModelAndView();
-		this.warrantyService.delete(warrantyId);
-		res.addObject("redict:list.do");
+		ModelAndView res;
+		Warranty warranty;
+		warranty = this.warrantyService.findOne(warrantyId);
+		Assert.notNull(warranty);
+		this.warrantyService.delete(warranty);
+		res = new ModelAndView("redirect:list.do");
 		return res;
 	}
 

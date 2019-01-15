@@ -147,7 +147,6 @@ public class FixUpTask extends DomainEntity {
 		this.complaints = complaint;
 	}
 
-	@NotNull
 	@Valid
 	@ManyToOne(optional = true)
 	public Warranty getWarranty() {

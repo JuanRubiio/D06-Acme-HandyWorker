@@ -1549,7 +1549,7 @@
 			</list>
 		</property>
 		<property name="customer" ref="customer2" />
-		<property name="warranty" ref="warranty1" />
+		<property name="warranty" ref="warranty2" />
 		<property name="category" ref="category10" />
 	</bean>
 

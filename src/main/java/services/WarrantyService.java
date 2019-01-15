@@ -79,7 +79,7 @@ public class WarrantyService {
 
 	}
 
-	public void delete(final Integer warrantyId) {
+	public void delete(final Warranty warranty) {
 		final Actor a = this.actorService.getPrincipal();
 		final Collection<Authority> authorities = a.getUserAccount().getAuthorities();
 		final ArrayList<String> listAuth = new ArrayList<String>();
@@ -87,10 +87,9 @@ public class WarrantyService {
 			for (final Authority au : authorities)
 				listAuth.add(au.getAuthority());
 		Assert.isTrue(listAuth.contains("ADMIN"));
-		Assert.notNull(warrantyId);
-		final Warranty warranty = this.warrantyRepository.findOne(warrantyId);
+		Assert.notNull(warranty);
 		Assert.isTrue(warranty.getDraft());
-		this.warrantyRepository.delete(warrantyId);
+		this.warrantyRepository.delete(warranty);
 	}
 
 }
