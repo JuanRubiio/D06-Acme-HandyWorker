@@ -65,7 +65,9 @@
 		<security:intercept-url pattern="/section/handyworker/**" access="hasRole('HANDYWORKER')" />
 		<security:intercept-url pattern="/endorser/admin/**" access="hasRole('ADMIN')" />
 		<security:intercept-url pattern="/endorsement/**" access="hasAnyRole('HANDYWORKER','CUSTOMER')" />
-
+		<security:intercept-url pattern="/complaint/customer/**" access="hasAnyRole('HANDYWORKER','CUSTOMER','REFEREE')" />
+		<security:intercept-url pattern="/complaint/referee/**" access="hasAnyRole('REFEREE')" />
+			<security:intercept-url pattern="/report/referee/**" access="hasAnyRole('REFEREE')" />
 		<security:intercept-url pattern="/actor/register.do" access="isAnonymous()" />
 
 

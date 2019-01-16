@@ -44,7 +44,6 @@ public class ReportRefereeController extends AbstractController {
 		final Report report;
 		//hay q pasarle la queja lo qe nose es como
 		report = this.reportService.create(complaintId);
-
 		res = this.createEditModelAndView(report);
 
 		return res;
@@ -105,16 +104,15 @@ public class ReportRefereeController extends AbstractController {
 		return res;
 	}
 
-	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+	@RequestMapping(value = "/save", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@Valid final Report report, final BindingResult binding) {
 		ModelAndView res;
-
 		if (binding.hasErrors())
 			res = this.createEditModelAndView(report);
 		else
 			try {
 				this.reportService.save(report);
-				res = new ModelAndView("redict:list.do");
+				res = new ModelAndView("redirect:list.do");
 			} catch (final Throwable oops) {
 				res = this.createEditModelAndView(report, "report.commit.error");
 			}

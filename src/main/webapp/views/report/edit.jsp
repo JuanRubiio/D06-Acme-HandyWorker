@@ -9,8 +9,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<form:form action="report/referee/edit.do" modelAttribute="report"
-	method="post">
+<form:form action="report/referee/save.do" modelAttribute="report" method="post">
 
 	<form:hidden path="id" />
 	<form:hidden path="version" />
@@ -21,19 +20,14 @@
 	<form:label path="description">
 		<spring:message code="report.description" />:
 	</form:label>
-	<jstl:if test="${report.version==0 }">
 		<form:input path="description" />
-	</jstl:if>
-	<jstl:if test="${report.version!=0 }">
-		<form:input path="description" value="${report.description}" />
-	</jstl:if>
 	<form:errors cssClass="error" path="description" />
 	<br />
 	
 	<form:label path="attachements">
 		<spring:message code="report.attachements" />:
 	</form:label>
-	<form:input path="attachements" placeholder="${report.attachements}"/>
+	<form:input path="attachements" />
 	<form:errors cssClass="error" path="attachements" />
 	<br />
 	
@@ -43,9 +37,9 @@
 	<form:label path="collectionNotes">
 		<spring:message code="report.collectionNotes" />:
 	</form:label>
-	<spring:url value="/note/customer,referee,handyWorker/list.do?reportId=*" var="list">
-		<i class="far fa-eye"></i>
-	</spring:url>
+
+<br/>
+
 	
 	
 

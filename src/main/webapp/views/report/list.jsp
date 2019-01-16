@@ -44,11 +44,4 @@
 	<display:column property="draft" titleKey="report.draft" />
 </display:table>
 <br />
-<security:authorize access="hasRole('REFEREE')">
-<spring:url
-	value="report/referee/create.do"
-	var="add">
-	<i class="fas fa-plus"></i>
-</spring:url>
-</security:authorize>
 <br />

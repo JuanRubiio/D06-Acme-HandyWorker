@@ -85,7 +85,7 @@
 		</security:authorize>
 
 		<security:authorize access="hasRole('REFEREE')">
-			<li><a class="fNiv" href="complaint/referee/listAll.do"><spring:message code="master.page.referee.complaint.all" /></a></li>
+			<li><a class="fNiv" href="complaint/referee/list.do"><spring:message code="master.page.referee.complaint.all" /></a></li>
 			<li><a href="complaint/referee/listOwn.do"><spring:message code="master.page.referee.complaint.own" /></a></li>
 
 		</security:authorize>

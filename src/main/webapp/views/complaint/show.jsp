@@ -12,11 +12,17 @@
 <h1><jstl:out value="${complaint.ticker }"></jstl:out></h1>
 
 <div>
-	<p><spring:message code="complaint.description"/><jstl:out value="${complaint.description }"></jstl:out></p>
-	<p><spring:message code="complaint.attachments"/><jstl:out value="${complaint.attachments }"></jstl:out></p>
-	<p><spring:message code="complaint.fixUpTask"/><jstl:out value="${complaint.fixUpTask }"></jstl:out></p>
+
+	<p><spring:message code="complaint.description"/>: <jstl:out value="${complaint.description }"></jstl:out></p>
+	<p><spring:message code="complaint.attachements"/>: <jstl:out value="${complaint.attachements }"></jstl:out></p>
 </div>
 <br/>
+<security:authorize access="hasRole('REFEREE')">
+<input type="button" name="createReport"
+		value="<spring:message code="complaint.assign" />"
+		onclick="javascript: relativeRedir('report/referee/create.do?complaintId=${complaint.id}');" />
+<br/>
+</security:authorize>
 <input type="button" name="cancel"
 		value="<spring:message code="complaint.cancel" />"
 		onclick="javascript: relativeRedir('complaint/customer/list.do');" />

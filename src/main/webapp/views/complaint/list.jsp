@@ -19,10 +19,6 @@
 	<spring:message code="complaint.ticker" var="tickerHeader" />
 	<display:column property="ticker" title="${tickerHeader}" sortable="false" />
 	
-	<security:authorize access="hasRole('REFEREE')">
-	
-	</security:authorize>
-	
 	<display:column>
 	<security:authorize access="hasRole('CUSTOMER')">
 		<a href="complaint/customer/show.do?complaintId=${row.id}">
@@ -30,8 +26,9 @@
 		</a>
 	</security:authorize>
 	<security:authorize access="hasRole('REFEREE')">
-		<a href="report/referee/create.do?complaintId=${row.id}">
-			<spring:message code="report.create"/>
+				
+		<a href="complaint/referee/show.do?complaintId=${row.id}"/>
+			<spring:message code="complaint.show"/>
 		</a>
 	</security:authorize>
 	
