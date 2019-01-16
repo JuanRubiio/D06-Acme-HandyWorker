@@ -9,19 +9,14 @@
 <%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<!-- Listing grid -->
 
 <display:table pagesize="5" class="displaytag" keepStatus="true"
 	name="complaints" requestURI="${requestURI}" id="row">
 	
-	<!-- Attributes -->
-	
 	<spring:message code="complaint.ticker" var="tickerHeader" />
-	<display:column property="ticker" title="${tickerHeader}" sortable="false" />
+	<display:column property="ticker" title="${tickerHeader}" />
 	
-	<security:authorize access="hasRole('REFEREE')">
-	
-	</security:authorize>
+	<security:authorize access="hasRole('REFEREE')"></security:authorize>
 	
 	<display:column>
 	<security:authorize access="hasRole('CUSTOMER')">
@@ -29,24 +24,12 @@
 			<spring:message code="complaint.show"/>
 		</a>
 	</security:authorize>
+	
 	<security:authorize access="hasRole('REFEREE')">
 		<a href="report/referee/create.do?complaintId=${row.id}">
 			<spring:message code="report.create"/>
 		</a>
 	</security:authorize>
 	
-	</display:column>
-	
-	
-	
+	</display:column>	
 </display:table>
-
-<!-- Action links -->
-
-<security:authorize access="hasRole('CUSTOMER')">
-	<div>
-		<input type="button" name="create"
-		value="<spring:message code="complaint.create" />"
-		onclick="javascript: relativeRedir('complaint/customer/create.do');" />
-	</div>
-</security:authorize>

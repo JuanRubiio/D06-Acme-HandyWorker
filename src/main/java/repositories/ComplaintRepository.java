@@ -1,6 +1,7 @@
 
 package repositories;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -17,5 +18,8 @@ public interface ComplaintRepository extends JpaRepository<Complaint, Integer> {
 
 	@Query("select r.complaint.id from Report r join r.complaint c")
 	List<Integer> idQuejasConReferee();
+
+	@Query("select f.complaints from FixUpTask f where f.customer.id=?1")
+	Collection<Complaint> quejasPorCustomer(Integer customerId);
 
 }

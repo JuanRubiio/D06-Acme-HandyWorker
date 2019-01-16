@@ -88,6 +88,9 @@
 		<bean class="converters.StringToReportConverter" />
 		<bean class="converters.StringToFinderConverter" />
 		<bean class="converters.StringToWarrantyConverter" />
+		
+		<bean class="converters.ComplaintToStringConverter" />
+		<bean class="converters.StringToComplaintConverter" />
 	</util:list>
 
 </beans>

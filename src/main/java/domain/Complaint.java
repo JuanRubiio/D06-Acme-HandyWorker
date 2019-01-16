@@ -5,7 +5,6 @@ import java.util.Date;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -13,6 +12,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -26,7 +26,6 @@ public class Complaint extends DomainEntity {
 
 	@NotBlank
 	@Pattern(regexp = "\\d{6}-[A-Z]{4}")
-	@Column(unique = true)
 	public String getTicker() {
 		return this.ticker;
 	}
@@ -36,7 +35,8 @@ public class Complaint extends DomainEntity {
 	}
 
 	@NotNull
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	public Date getMoment() {
 		return this.moment;
 	}

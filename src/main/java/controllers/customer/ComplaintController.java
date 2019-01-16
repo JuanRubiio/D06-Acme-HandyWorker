@@ -13,14 +13,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import controllers.AbstractController;
-
 import services.ComplaintService;
 import services.CustomerService;
+import services.FixUpTaskService;
 import services.RefereeService;
 import services.ReportService;
+import controllers.AbstractController;
 import domain.Complaint;
-import domain.Customer;
+import domain.FixUpTask;
 import domain.Referee;
 import domain.Report;
 
@@ -38,12 +38,14 @@ public class ComplaintController extends AbstractController {
 
 	@Autowired
 	private ReportService		reportService;
+	@Autowired
+	private FixUpTaskService	fixUpTaskService;
 
 
 	@RequestMapping(value = "/customer/list", method = RequestMethod.GET)
 	public ModelAndView list() {
 		ModelAndView result;
-		final Collection<Complaint> complaints = this.complaintService.findAll();
+		final Collection<Complaint> complaints = this.complaintService.findByCustomer();
 		result = new ModelAndView("complaint/list");
 		result.addObject("requestURI", "complaint/list.do");
 		result.addObject("complaints", complaints);
@@ -54,17 +56,21 @@ public class ComplaintController extends AbstractController {
 	public ModelAndView display(final int complaintId) {
 		ModelAndView result;
 		final Complaint complaint = this.complaintService.findOne(complaintId);
+		final FixUpTask referredFixUpTask = this.fixUpTaskService.findByComplaint(complaintId);
 		result = new ModelAndView("complaint/show");
 		result.addObject("requestURI", "complaint/customer/show.do");
 		result.addObject("complaint", complaint);
+		result.addObject("referredFixUpTask", referredFixUpTask);
 		return result;
 	}
 
 	@RequestMapping(value = "/customer/create", method = RequestMethod.GET)
-	public ModelAndView create(@RequestParam final int fixUpTaskId) {
+	public ModelAndView create(final int fixUpTaskId) {
 		ModelAndView result;
 		final Complaint c = this.complaintService.create();
 		result = this.createEditModelAndView(c);
+		result.addObject(fixUpTaskId);
+		result.addObject("action", "complaint/customer/create.do?fixUpTaskId=" + fixUpTaskId);
 		return result;
 
 	}
@@ -84,15 +90,19 @@ public class ComplaintController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/customer/create", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid final Complaint c, final BindingResult binding) {
+	public ModelAndView save(@Valid final Complaint c, @RequestParam final Integer fixUpTaskId, final BindingResult binding) {
 		ModelAndView result;
 		if (binding.hasErrors()) {
 			System.out.println(binding.getAllErrors());
 			result = this.createEditModelAndView(c);
 		} else
 			try {
-				final Customer cus = this.customerService.findByPrincipal();
-				this.complaintService.save(c);
+				final FixUpTask fut = this.fixUpTaskService.findOne(fixUpTaskId);
+				final Collection<Complaint> complaints = fut.getComplaints();
+				complaints.add(c);
+				fut.setComplaints(complaints);
+				this.fixUpTaskService.save(fut);
+
 				result = new ModelAndView("redirect:list.do");
 			} catch (final Throwable oops) {
 				result = this.createEditModelAndView(c, "complaint.commit.error");

@@ -9,12 +9,13 @@
 <%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<h1><jstl:out value="${complaint.ticker }"></jstl:out></h1>
 
 <div>
-	<p><spring:message code="complaint.description"/><jstl:out value="${complaint.description }"></jstl:out></p>
-	<p><spring:message code="complaint.attachments"/><jstl:out value="${complaint.attachments }"></jstl:out></p>
-	<p><spring:message code="complaint.fixUpTask"/><jstl:out value="${complaint.fixUpTask }"></jstl:out></p>
+	<p><spring:message code="complaint.referredFixUpTask" />: <jstl:out value="${referredFixUpTask.description}"></jstl:out></p>
+	<p><spring:message code="complaint.ticker"/>: <jstl:out value="${complaint.ticker }"></jstl:out></p>
+	<p><spring:message code="complaint.moment"/>: <jstl:out value="${complaint.moment }"></jstl:out></p>
+	<p><spring:message code="complaint.description"/>: <jstl:out value="${complaint.description }"></jstl:out></p>
+	<p><spring:message code="complaint.attachements"/>: <jstl:out value="${complaint.attachements }"></jstl:out></p>
 </div>
 <br/>
 <input type="button" name="cancel"

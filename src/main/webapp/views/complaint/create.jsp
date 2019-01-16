@@ -9,27 +9,31 @@
 <%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<form:form action="complaint/customer/create.do" modelAttribute="complaint">
+<form:form action="${action}" modelAttribute="complaint">
 
 	<form:hidden path="id" />
 	<form:hidden path="version" />
 	<form:hidden path="moment"/>
-	<form:hidden path="fixUpTask.id"/>
 	<form:hidden path="ticker"/>
+	
+
 	
 	<form:label path="description">
 		<spring:message code="complaint.description" />:
 	</form:label>
+	
+	
 	<form:input path="description" />
 	<form:errors cssClass="error" path="description" />
 	<br />
 	
-	<form:label path="attachments">
-		<spring:message code="complaint.attachments" />:
+	<form:label path="attachements">
+		<spring:message code="complaint.attachements" />:
 	</form:label>
-	<form:textarea  path="attachments"/>
-	<form:errors cssClass="error" path="attachments" />
+	<form:textarea  path="attachements"/>
+	<form:errors cssClass="error" path="attachements" />
 	<br />
+		
 	
 	<input type="submit" name="save"
 	value="<spring:message code="complaint.save" />"

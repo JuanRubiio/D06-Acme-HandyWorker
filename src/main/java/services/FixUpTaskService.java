@@ -26,11 +26,13 @@ public class FixUpTaskService {
 	@Autowired
 	private FixUpTaskRepository	fixUpTaskRepository;
 	@Autowired
-	private ActorService	actorService;
+	private ActorService		actorService;
 	@Autowired
-	private ApplicationService	 applicationService;
+	private ApplicationService	applicationService;
 	@Autowired
 	private UtilitiesService	utilitiesService;
+	@Autowired
+	private CustomerService		customerService;
 
 
 	public FixUpTask create() {
@@ -93,23 +95,30 @@ public class FixUpTaskService {
 
 		this.fixUpTaskRepository.delete(fixUpTask);
 	}
-	
-	public List<FixUpTask> ListingFixUpTaskByHandyWorker(Integer handyWorkerId,String status){
-		List<FixUpTask> res = new ArrayList<FixUpTask>(); 
-		List<Application> hwApp = new ArrayList<Application>();
-		List<Application> allApp = new ArrayList<Application>();
+
+	public List<FixUpTask> ListingFixUpTaskByHandyWorker(final Integer handyWorkerId, final String status) {
+		final List<FixUpTask> res = new ArrayList<FixUpTask>();
+		final List<Application> hwApp = new ArrayList<Application>();
+		final List<Application> allApp = new ArrayList<Application>();
 		allApp.addAll(this.applicationService.findAll());
-		Integer i=0;
-		for(i=0;i<allApp.size();i++){
-			if(allApp.get(i).getHandyWorker().getId()==handyWorkerId && allApp.get(i).getStatus().contentEquals(status)){
+		Integer i = 0;
+		for (i = 0; i < allApp.size(); i++)
+			if (allApp.get(i).getHandyWorker().getId() == handyWorkerId && allApp.get(i).getStatus().contentEquals(status))
 				hwApp.add(allApp.get(i));
-			}
-		}
-		
-		for(i=0;i<hwApp.size();i++){
+
+		for (i = 0; i < hwApp.size(); i++)
 			res.add(hwApp.get(i).getFixUpTask());
-		}
-		
+
+		return res;
+	}
+
+	public FixUpTask findByComplaint(final int complaintId) {
+		final FixUpTask res = this.fixUpTaskRepository.fixUpTaskByComplaint(complaintId);
+		return res;
+	}
+
+	public Collection<FixUpTask> findByCustomer() {
+		final Collection<FixUpTask> res = this.fixUpTaskRepository.fixUpTasksByCustomer(this.customerService.findByPrincipal().getId());
 		return res;
 	}
 

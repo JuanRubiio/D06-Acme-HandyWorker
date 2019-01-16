@@ -24,6 +24,8 @@ public class ComplaintService {
 	private ComplaintRepository	complaintRepository;
 	@Autowired
 	private UtilitiesService	utilitiesService;
+	@Autowired
+	private ActorService		actorService;
 
 
 	//Supporting services
@@ -64,6 +66,12 @@ public class ComplaintService {
 		res = this.complaintRepository.findAll();
 		Assert.notNull(res);
 
+		return res;
+	}
+
+	public Collection<Complaint> findByCustomer() {
+		Collection<Complaint> res;
+		res = this.complaintRepository.quejasPorCustomer(this.actorService.getPrincipal().getId());
 		return res;
 	}
 
