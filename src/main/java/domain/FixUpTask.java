@@ -146,7 +146,7 @@ public class FixUpTask extends DomainEntity {
 	public void setComplaints(final Collection<Complaint> complaint) {
 		this.complaints = complaint;
 	}
-
+	@NotNull
 	@Valid
 	@ManyToOne(optional = true)
 	public Warranty getWarranty() {

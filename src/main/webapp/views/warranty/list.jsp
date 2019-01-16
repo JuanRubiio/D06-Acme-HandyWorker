@@ -46,8 +46,10 @@
 	<br />
 
 
-	<spring:url value="fixUpTask/customer/create.do" var="add">
-		<i class="fas fa-plus"></i>
-	</spring:url>
+	<security:authorize access="hasRole('ADMIN')">
+	<input type="submit" name="create"
+		value="<spring:message code="warranty.create" />"
+		onclick="javascript: relativeRedir('warranty/administrator/create.do');" />
+</security:authorize>
 </security:authorize>
 <br />

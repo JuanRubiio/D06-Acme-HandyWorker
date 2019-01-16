@@ -39,11 +39,10 @@ public class WarrantyAdministratorController extends AbstractController {
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
+
 		ModelAndView res;
-		Warranty warranty;
-
+		final Warranty warranty;
 		warranty = this.warrantyService.create();
-
 		res = this.createEditModelAndView(warranty);
 
 		return res;
@@ -71,18 +70,7 @@ public class WarrantyAdministratorController extends AbstractController {
 		result = this.createEditModelAndView(warranty);
 		return result;
 	}
-	//	@RequestMapping(value="/delete",method = RequestMethod.GET)
-	//	public ModelAndView delete(@RequestParam final int tutorialId){
-	//		
-	//		ModelAndView res;
-	//		Tutorial tutorial;
-	//		tutorial = this.TutorialService.findOne(tutorialId);
-	//		Assert.notNull(tutorial);
-	//		TutorialService.delete(tutorial);
-	//		//REDIRIGE AL CONTROLLER DE LIST Y CARGA LA VISTA LIST.JSP
-	//		res = new ModelAndView("redirect:list.do");
-	//		return res;
-	//	}
+
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
 	public ModelAndView delete(@RequestParam final int warrantyId) {
 		ModelAndView res;
@@ -125,7 +113,7 @@ public class WarrantyAdministratorController extends AbstractController {
 	//
 	//		return res;
 	//	}
-	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+	@RequestMapping(value = "/save", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@Valid final Warranty warranty, final BindingResult binding) {
 		ModelAndView res;
 
@@ -134,7 +122,7 @@ public class WarrantyAdministratorController extends AbstractController {
 		else
 			try {
 				this.warrantyService.save(warranty);
-				res = new ModelAndView("redict:list.do");
+				res = new ModelAndView("redirect:list.do");
 			} catch (final Throwable oops) {
 				res = this.createEditModelAndView(warranty, "warranty.commit.error");
 			}
