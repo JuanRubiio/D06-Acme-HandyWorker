@@ -71,6 +71,11 @@
 
 		</security:authorize>
 
+		<security:authorize access="hasRole('SPONSOR')">
+			<li><a href="sponsorship/sponsor/list.do"><spring:message code="master.page.sponsor.sponsorships" /></a></li>
+
+		</security:authorize>
+		
 		<security:authorize access="hasRole('REFEREE')">
 			<li><a class="fNiv" href="complaint/referee/listAll.do"><spring:message code="master.page.referee.complaint.all" /></a></li>
 			<li><a href="complaint/referee/listOwn.do"><spring:message code="master.page.referee.complaint.own" /></a></li>

@@ -51,6 +51,13 @@ public class SponsorshipService {
 
 	}
 
+	public Collection<Sponsorship> findBySponsorId(final Integer sponsorID) {
+
+		Assert.notNull(sponsorID);
+		return this.sponsorshipRepository.findBySponsorId(sponsorID);
+
+	}
+	
 	public Collection<Sponsorship> findAll() {
 
 		Collection<Sponsorship> res;

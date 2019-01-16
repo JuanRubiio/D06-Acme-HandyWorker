@@ -29,17 +29,16 @@ public class SectionHandyWorkerController extends AbstractController{
 	private SectionService SectionService;
 	
 	
-	
 	@RequestMapping(value="/list",method = RequestMethod.GET)
-	public ModelAndView list(){
+	public ModelAndView list(@RequestParam Integer tutorialId){
 		
 		ModelAndView res;
 		Collection<Section> Sectiones;
 		
-		Sectiones = SectionService.findAll();
+		Sectiones = SectionService.findByTutorial(tutorialId);
 		
 		res = new ModelAndView("section/list");
-		res.addObject("Sectiones",Sectiones);
+		res.addObject("sections",Sectiones);
 		res.addObject("requestURI","section/handyworker/list.do");
 		
 		return res;

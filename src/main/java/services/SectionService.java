@@ -52,6 +52,15 @@ public class SectionService {
 		return res;
 	}
 
+	public Collection<Section> findByTutorial(Integer id) {
+		final Collection<Section> res;
+		res = this.sectionRepository.getSectionsPerTutorial(id);
+		Assert.notNull(res);
+
+		return res;
+	}
+
+	
 	public Section save(final Section section) {
 		final Section res;
 		Assert.notNull(section);

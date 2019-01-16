@@ -9,7 +9,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<form:form action="sponsorship/sponsor/edit.do" modelAttribute="sponsorship" method="post">
+<form:form action="sponsorship/sponsor/save.do" modelAttribute="sponsorship" method="post">
 
 	<form:hidden path="id" />
 	<form:hidden path="version" />
@@ -39,10 +39,10 @@
 	<form:errors cssClass="error" path="creditCard" />
 	<br />
 
-	<input type="submit" name="Save"
+	<input type="submit" name="save"
 		value="<spring:message code="sponsorship.save"/>" />
 
-	<input type="button" name="Cancel"
+	<input type="button" name="cancel"
 		value="<spring:message code="sponsorship.cancel" />"
 		onclick="javascript: relativeRedir('sponsorship/sponsor/list.do');" />
 

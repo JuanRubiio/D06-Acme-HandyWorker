@@ -39,33 +39,15 @@
 	<b><spring:message code="tutorial.handyWorker"></spring:message>:</b> <jstl:out value="${tutorial.handyWorker.name}"></jstl:out>
 	<br />
 	
+	<b><spring:message code="tutorial.sections"></spring:message>:</b> <input type="submit" name="listsections" value="<spring:message code="tutorial.listsections"/>" 
+	onclick="javascript:relativeRedir('section/handyworker/list.do?tutorialId=${tutorial.id}')" />			
+	<br />
+				
 	</fieldset>
 
-		<fieldset>
-			<legend>
-				<b><spring:message code="tutorial.sections"></spring:message></b>
-			</legend>
-			<display:table name="sections" id="section" pagesize="5" class="displaytag">
-
-				<spring:message code="tutorial.section.title" var="title"></spring:message>
-				<display:column property="title" title="${title}"
-					sortable="true" />
-					
-				<spring:message code="tutorial.section.orden" var="orden"></spring:message>
-				<display:column property="orden" title="${orden}"
-					sortable="true" />
-
-			</display:table>
-			
-			<spring:message code="tutorial.listsections" var="listsections"></spring:message>
-			<input type="submit" name="listsections" value="${listsections}"
-				onclick="javascript:relativeRedir('section/handyworker/list.do')" />
-			
-			
-			
-		</fieldset>
 		<br />
-		
+			
+
 	<security:authorize access="hasRole('HANDYWORKER')">	
 		<input type="submit" name="cancel" value="<spring:message code="tutorial.cancel" />"
 		onclick="javascript: relativeRedir('tutorial/handyworker/list.do');" />
