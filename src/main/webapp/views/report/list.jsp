@@ -11,37 +11,32 @@
 <%@taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-
-<display:table name="report" requestURI="report/referee/list.do"
-	class="displaytag">
-	<display:column>
-		<jstl:if test="${!report.draft }">
-			<security:authorize
-				access="hasRole('REFEREE'||'CUSTOMER'||'HANDYWORKER')">
-				<spring:url value="report/referee/show.do?reportId=${report.id}"
-					var="show">
-					<i class="far fa-eye"></i>
-				</spring:url>
-			</security:authorize>
-		</jstl:if>
-		<jstl:if test="${report.draft }">
-			<security:authorize access="hasRole('REFEREE')">
-				<spring:url value="report/referee/edit.do?reportId=${report.id}"
-					var="edit">
-					<i class="fas fa-pencil-alt"></i>
-				</spring:url>
-				<spring:url
-					value="report/referee/delete.do?reportId=${fixUpTask.id}"
-					var="delete">
-					<i class="fas fa-trash-alt"></i>
-				</spring:url>
-			</security:authorize>
-		</jstl:if>
-	</display:column>
-	<display:column property="id" titleKey="report.id" />
-	<display:column property="moment" titleKey="report.moment" />
-	<display:column property="description" titleKey="report.description" />
-	<display:column property="draft" titleKey="report.draft" />
+<security:authorize access="hasRole('REFEREE')">
+	<display:table name="${reports}" id="report" pagesize=5
+		requestURI="${requestURI}" class="displaytag">
+		<display:column>
+			<jstl:if test="${!report.draft }">
+				<security:authorize access="hasRole('REFEREE')">
+					<input type="submit" name="show"
+						value="<spring:message code="warranty.show" />"
+						onclick="javascript: relativeRedir('report/referee/show.do?reportId=${report.id}');" />
+				</security:authorize>
+			</jstl:if>
+			<jstl:if test="${report.draft }">
+				<security:authorize access="hasRole('REFEREE')">
+					<input type="submit" name="show"
+						value="<spring:message code="warranty.show" />"
+						onclick="javascript: relativeRedir('report/referee/edit.do?reportId=${report.id}');" />
+				</security:authorize>
+			</jstl:if>
+			<input type="submit" name="show"
+				value="<spring:message code="warranty.show" />"
+				onclick="javascript: relativeRedir('eport/referee/delete.do?reportId=${report.id}');" />
+</display:column>
+<display:column property="id" titleKey="report.id" />
+<display:column property="moment" titleKey="report.moment" />
+<display:column property="description" titleKey="report.description" />
+<display:column property="draft" titleKey="report.draft" />
 </display:table>
 <br />
-<br />
+</security:authorize>

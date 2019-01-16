@@ -9,7 +9,8 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<form:form action="report/referee/save.do" modelAttribute="report" method="post">
+<form:form action="report/referee/save.do" modelAttribute="report"
+	method="post">
 
 	<form:hidden path="id" />
 	<form:hidden path="version" />
@@ -20,32 +21,34 @@
 	<form:label path="description">
 		<spring:message code="report.description" />:
 	</form:label>
-		<form:input path="description" />
+	<form:input path="description" />
 	<form:errors cssClass="error" path="description" />
 	<br />
-	
+
 	<form:label path="attachements">
 		<spring:message code="report.attachements" />:
 	</form:label>
 	<form:input path="attachements" />
 	<form:errors cssClass="error" path="attachements" />
 	<br />
-	
+
 	<form:checkbox path="draft" />Draft
 	<br />
-	
+
 	<form:label path="collectionNotes">
 		<spring:message code="report.collectionNotes" />:
 	</form:label>
 
-<br/>
+	<br />
 
+
+
+
+
+	<input type="button" name="save"
+		value="<spring:message code="report.save" />"
+		onclick="javascript: relativeRedir('report/referee/list.do');"/>
 	
-	
-
-	<input type="submit" name="save"
-		value="<spring:message code="report.save"/>" />
-
 	<input type="button" name="cancel"
 		value="<spring:message code="report.cancel" />"
 		onclick="javascript: relativeRedir('report/referee/list.do');" />
